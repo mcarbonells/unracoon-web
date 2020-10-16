@@ -1,5 +1,5 @@
 export interface GeneralResponse {
     data: object;
-    loading: false;
+    loading: boolean;
     networkStatus: number;
 }
