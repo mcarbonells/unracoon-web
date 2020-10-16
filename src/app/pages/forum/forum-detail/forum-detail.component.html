@@ -1,0 +1,45 @@
+<button class="btn" (click)="getBack()"> Atras </button>
+
+<h2>Detalle Foro</h2>
+
+<h3>{{thread.title}}</h3>
+<h3>{{thread.description}}</h3>
+<h3>{{thread.userName}}</h3>
+<h3>{{thread.userId}}</h3>
+<h3>{{thread._id}}</h3>
+
+<ul>
+    <li *ngFor="let entry of entrys"> {{entry.message}}</li>
+</ul>
+
+
+<form
+  class="form-horizontal form-material"
+  id="loginform"
+  autocomplete="off"
+  [formGroup]="entryForm"
+  (ngSubmit)="sendEntry()"
+>
+  <div class="form-group m-t-40">
+    <div class="col-xs-12">
+      <input
+        class="form-control"
+        placeholder="Message"
+        formControlName="message"
+      />
+    </div>
+  </div>
+  
+  <div class="form-group text-center m-t-20">
+    <div class="col-xs-12">
+      <button
+        class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+        type="submit"
+      >
+        Enviar
+      </button>
+    </div>
+  </div>
+
+
+</form>
