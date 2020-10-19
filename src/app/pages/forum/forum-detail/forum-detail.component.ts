@@ -1,19 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Entry, EntryResponse, Thread } from 'src/app/models/forum.model';
 import { ForumService } from 'src/app/services/forum.service';
-import { runInThisContext } from 'vm';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-forum-detail',
   templateUrl: './forum-detail.component.html',
   styleUrls: ['./forum-detail.component.scss']
 })
-export class ForumDetailComponent implements OnInit {
+export class ForumDetailComponent implements OnInit, OnChanges {
 
   @Input() thread: Thread;
-  @Output() back = new EventEmitter<boolean>();
   public entryForm;
+  faPlus = faPlus;
+  formVisible = false;
+  faClose = faWindowClose;
 
   constructor(
     private forumService: ForumService,
@@ -22,27 +25,39 @@ export class ForumDetailComponent implements OnInit {
 
   entrys: Entry[];
   ngOnInit(): void {
-    this.entryForm = this.fb.group({
-      message: ['', Validators.required],
-      threadId: [this.thread._id, Validators.required],
-      userName: ['Andres Velandia', Validators.required],
-      userId: ['2', Validators.required],
-    });
-    console.log('aaaaaa');
-    this.forumService.getEntrysThread(this.thread._id).subscribe((data: EntryResponse) => {
-      this.entrys = data.data.entryThread;
-      console.log(this.entrys);
-    });
+    this.getEntrys();
   }
 
-  getBack() {
-    this.back.emit(false);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.thread) {
+      this.getEntrys();
+    }
+  }
+
+  getEntrys() {
+    if (this.thread) {
+      this.entryForm = this.fb.group({
+        message: ['', Validators.required],
+        threadId: [this.thread._id, Validators.required],
+        userName: ['Andres Velandia', Validators.required],
+        userId: ['2', Validators.required],
+      });
+      this.forumService.getEntrysThread(this.thread._id).subscribe((data: EntryResponse) => {
+        this.entrys = data.data.entryThread;
+      });
+    }
   }
 
   sendEntry() {
     this.forumService.addEntry(this.entryForm.value).subscribe((response: EntryResponse) => {
       console.log(response.data.createEntry );
     });
+  }
+
+  showForm() {
+    if ( this.thread ) {
+      this.formVisible = true;
+    }
   }
 
 }

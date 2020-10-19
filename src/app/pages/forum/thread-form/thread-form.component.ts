@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ForumService } from 'src/app/services/forum.service';
 import { ThreadResponse } from 'src/app/models/forum.model';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-thread-form',
@@ -10,6 +11,8 @@ import { ThreadResponse } from 'src/app/models/forum.model';
 })
 export class ThreadFormComponent implements OnInit {
   threadForm;
+  faClose = faWindowClose;
+  @Output() closeForm = new EventEmitter<any>();
   constructor(
     private forumService: ForumService,
     private fb: FormBuilder,
@@ -29,6 +32,10 @@ export class ThreadFormComponent implements OnInit {
     this.forumService.addThread(this.threadForm.value).subscribe((response: ThreadResponse) => {
       console.log(response.data.allThreads);
     });
+  }
+
+  close() {
+    this.closeForm.emit();
   }
 
 }

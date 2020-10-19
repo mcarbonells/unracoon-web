@@ -1,26 +1,33 @@
-<div class="container foro-container" *ngIf="!showDetail; else detail">
-    <h2>Foro Nivel A1</h2>
-    <div class="row">
-        <div class="col-xm-6">
-            <div class="list">
-                <div class="card">
-                    <div class="card-header">
-                        Lista de entradas
-                        <button class="btn btn-primary button-add" (click)="showForm()"> Agregar Entrada </button>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item list-thread" *ngFor="let thread of threads" (click)="openThread(thread)">{{thread.title}}</li>
-                    </ul>
-                  </div>
-            </div>
-        </div>
+<div class="container forum-container">
+  <div class="forum-title my-3">
+    <h1>Foro Nivel A1</h1>
+  </div>
+  
+  <div class="row forum-content mb-3">
+    <div class="col-lg-4 p-0 forum-left-panel">
+      <div class="forum-content-title px-4">
+        <h3>Debates</h3>
+        <button class="btn button-add" (click)="showForm()">
+            <fa-icon class="fa-icon" [icon]="faPlus"></fa-icon>
+        </button>
+      </div>
+      <div class="forum-content-list">
+        <ul class="list-group list-group-flush">
+          <li
+            class="list-group-item list-thread"
+            *ngFor="let thread of threads"
+            (click)="openThread(thread)"
+          >
+            <h4>{{ thread.title }}</h4>
+            <h6>{{ thread.userName }}</h6>
+          </li>
+        </ul>
+      </div>
     </div>
+    <div class="col-lg-8 p-0">
+      <app-forum-detail [thread]="threadSelected"></app-forum-detail>
+    </div>
+  </div>
 
-    <app-thread-form *ngIf="formVisible" class="form-bottom"></app-thread-form>
+  <app-thread-form *ngIf="formVisible" class="form-bottom" (closeForm)="formVisible = false"></app-thread-form>
 </div>
-
-
-<ng-template #detail>
-    <app-forum-detail [thread]="threadSelected" (back)="hideDetail($event)"></app-forum-detail>
-</ng-template>
-    

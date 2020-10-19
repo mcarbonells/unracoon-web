@@ -1,6 +1,10 @@
-<div class="form-bottom">
-  <div class="card mx-2">
-    <div class="card-header">Agregar Thread</div>
+  <div class="card mx-2 form-card">
+    <div class="card-header">
+      <h3>Agregar Thread</h3>
+      <button class="btn button-close-form" (click)="close()">
+        <fa-icon class="fa-icon" [icon]="faClose"></fa-icon>
+      </button>
+    </div>
     <div class="card-body">
       <form
         class="form-horizontal form-material"
@@ -9,37 +13,33 @@
         [formGroup]="threadForm"
         (ngSubmit)="sendThread()"
       >
-        <div class="form-group m-t-40">
-          <div class="col-xs-12">
-            <input
-              class="form-control"
-              placeholder="Title"
-              formControlName="title"
-            />
-          </div>
+        <div class="col-xs-12">
+          <label class="form-label"> Titulo </label>
+          <input
+            class="form-control"
+            placeholder="Title"
+            formControlName="title"
+          />
         </div>
 
-        <div class="form-group m-t-40">
-          <div class="col-xs-12">
-            <input
-              class="form-control"
-              placeholder="Description"
-              formControlName="description"
-            />
-          </div>
+        <div class="col-xs-12">
+          <label class="form-label"> Descripción</label>
+          <textarea
+            class="form-control textarea-form"
+            pplaceholder="Description"
+            formControlName="description"
+          >
+          </textarea>
         </div>
 
-        <div class="form-group text-center m-t-20">
-          <div class="col-xs-12">
-            <button
-              class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
-              type="submit"
-            >
-              Enviar
-            </button>
-          </div>
+        <div class="col-xs-12 button-form-bottom">
+          <button
+            class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+            type="submit"
+          >
+            Enviar
+          </button>
         </div>
       </form>
     </div>
   </div>
-</div>
