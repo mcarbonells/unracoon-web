@@ -1,8 +1,65 @@
-.foro-container {
+.forum-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 100%;
 }
 
+.forum-content {
+    width: 95%;
+    border: 1px solid black;
+    height: 75vh;
+    min-height: 300px;
+    min-width: 500px;
+    box-shadow: 2px 0 7px #999;
+    overflow: hidden;
+}
+
+.forum-left-panel {
+    border-right: 1px solid white;
+}
+
+.forum-content-title {
+    background-color: #636E72;
+    color: white;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    position: relative;
+}
+
+.forum-content-list {
+    background-color: #DFE6E9;
+    height: 90%;
+    overflow: auto;
+}
+
+.forum-content-list::-webkit-scrollbar {
+    display: none;
+  }
+
 .list-thread{
+    background-color: transparent;
     cursor: pointer;
+}
+
+.list-thread:hover{
+    background-color: #B2BEC3;
+    cursor: pointer;
+}
+
+.button-add {
+    color: white;
+    position: absolute;
+    right: 10px;
+    border: 1px solid white;
+}
+
+.forum-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

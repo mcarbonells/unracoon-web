@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Thread, ThreadResponse } from 'src/app/models/forum.model';
 import { ForumService } from 'src/app/services/forum.service';
-
-declare var $: any;
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-forum',
@@ -17,8 +16,8 @@ export class ForumComponent implements OnInit {
   threadsSubscription: Subscription;
   threads: Thread[];
   threadSelected: Thread;
-  showDetail = false;
   formVisible = false;
+  faPlus = faPlus;
 
   constructor(private forumService: ForumService) { }
 
@@ -30,11 +29,6 @@ export class ForumComponent implements OnInit {
 
   openThread( thread: Thread ) {
     this.threadSelected = thread;
-    this.showDetail = true;
-  }
-
-  hideDetail(event: boolean) {
-    this.showDetail = event;
   }
 
   showForm() {
