@@ -1,0 +1,24 @@
+<div class="container weekQuiz-container">*ngIf="!showDetail; else detail">
+  <h2>Week QUiz</h2>
+  <div class="row">
+    <div class="col-xm-6">
+      <div class="list">
+        <div class="card">
+          <div class="card-header">Lista de Week Quices</div>
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item list-weekQuiz"
+              *ngFor="let weekQuiz of weekQuices" (click)="openThread(thread)"
+            >
+              {{ weekQuiz.idQuiz, weekQuiz.date}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #detail>
+  <app-forum-detail [weekQuiz]="weekQuizSelected" (back)="hideDetail($event)"></app-forum-detail>
+</ng-template>
