@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SupportService } from 'src/app/services/support.service';
 import { Ticket, TicketResponse } from 'src/app/models/support.model';
 import { FormBuilder, Validators } from '@angular/forms';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-support',
@@ -13,6 +15,8 @@ export class SupportComponent implements OnInit {
   tickets: Ticket[];
   ticketForm;
   formVisible = false;
+  faPlus = faPlus;
+  faClose = faWindowClose;
 
   constructor(
     private supportService: SupportService,
@@ -41,6 +45,10 @@ export class SupportComponent implements OnInit {
 
   showForm() {
     this.formVisible = true;
+  }
+
+  close() {
+    this.formVisible = false;
   }
 
 }
