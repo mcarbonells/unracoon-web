@@ -50,8 +50,8 @@ export class UsuarioService {
           email: "${user.email}",
           password: ${user.password},
         }) {
-          id
-        
+          data {id,name,uid,email}
+               
         }
       }
       `,
