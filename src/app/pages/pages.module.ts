@@ -14,14 +14,11 @@ import { ThreadFormComponent } from './forum/thread-form/thread-form.component';
 import { SupportComponent } from './support/support.component';
 import { ExamsComponent } from './exams/exams.component';
 import { VocabularyComponent } from './vocabulary/vocabulary.component';
-<<<<<<< HEAD
-import {WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
-import {WeekQuizFormComponent} from './exams/weekQuiz/weekQuiz-form/weekQuiz-form.component';
-=======
 import { CategoryComponent } from './vocabulary/category/category.component';
 import { WordsComponent } from './vocabulary/words/words.component';
-
->>>>>>> master
+import {WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
+import {UserQUizComponent} from './exams/userQuiz/userQuiz.component';
+import {UserQuizFormComponent} from './exams/userQuiz/userQuiz-form/userQuiz-form.component'
 
 @NgModule({
   declarations: [
@@ -33,13 +30,11 @@ import { WordsComponent } from './vocabulary/words/words.component';
     SupportComponent,
     ExamsComponent,
     VocabularyComponent,
-<<<<<<< HEAD
     WeekQuizComponent,
-    WeekQuizFormComponent
-=======
+    UserQUizComponent,
+    UserQuizFormComponent,
     CategoryComponent,
-    WordsComponent,
->>>>>>> master
+    WordsComponent
   ],
   exports: [
     PagesComponent,

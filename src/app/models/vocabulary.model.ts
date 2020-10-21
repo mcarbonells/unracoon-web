@@ -17,11 +17,11 @@ export interface CategoryResponse extends GeneralResponse {
 
 export interface Words {
   _id: string;
-  name: string,
-  category: string,
-  image: string,
-  linkW: string,
-  meaning: string
+  name: string;
+  category: string;
+  image: string;
+  linkW: string;
+  meaning: string;
 }
 
 export interface WordsData {
