@@ -15,6 +15,7 @@ import { SupportComponent } from './support/support.component';
 import { ExamsComponent } from './exams/exams.component';
 import { VocabularyComponent } from './vocabulary/vocabulary.component';
 import {WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
+import {WeekQuizFormComponent} from './exams/weekQuiz/weekQuiz-form/weekQuiz-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
     SupportComponent,
     ExamsComponent,
     VocabularyComponent,
-    WeekQuizComponent
+    WeekQuizComponent,
+    WeekQuizFormComponent
   ],
   exports: [
     PagesComponent,
