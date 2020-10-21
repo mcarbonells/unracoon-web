@@ -24,6 +24,7 @@ export class VocabularyService {
   }
 
   addCategory(category: Category) {
+    console.log(category)
     return this.apollo.mutate({
       mutation: gql`
       mutation {
