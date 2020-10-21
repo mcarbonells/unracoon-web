@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -12,23 +13,26 @@ export class RegisterComponent implements OnInit {
   public formSubmitted = false;
 
   public registerForm = this.fb.group({
-    nombre: ['Andres', Validators.required],
-    email: ['test100@gmai.com', [Validators.required, Validators.email]],
-    password: ['123456', Validators.required],
-    password2: ['123456', Validators.required],
-    terminos: [true, Validators.required],
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    password_confirmation: ['', Validators.required],
   }, {
-    validators: this.passwordsIguales('password', 'password2')
+    validators: this.passwordsIguales('password', 'password_confirmation')
   });
 
   constructor(
     private fb: FormBuilder,
+    private usuarioService: UsuarioService
   ) { }
 
   crearUsuario() {
     if (this.registerForm.invalid) {
       return;
     } else {
+     this.usuarioService.registerUser(this.registerForm.value).subscribe((response)=> {
+         console.log(response)
+      })
 
     }
   }
@@ -43,17 +47,13 @@ export class RegisterComponent implements OnInit {
 
   constrasenasNoValidas() {
     const pass1 = this.registerForm.get('password').value;
-    const pass2 = this.registerForm.get('password2').value;
+    const pass2 = this.registerForm.get('password_confirmation').value;
 
     if ((pass1 !== pass2) && this.formSubmitted) {
       return true;
     } else {
       return false;
     }
-  }
-
-  aceptaTerminos(): boolean {
-    return !this.registerForm.get('terminos').value && this.formSubmitted;
   }
 
   passwordsIguales(pass1Name: string, pass2Name: string) {
