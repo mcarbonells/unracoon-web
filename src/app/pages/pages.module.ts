@@ -14,6 +14,8 @@ import { ThreadFormComponent } from './forum/thread-form/thread-form.component';
 import { SupportComponent } from './support/support.component';
 import { ExamsComponent } from './exams/exams.component';
 import { VocabularyComponent } from './vocabulary/vocabulary.component';
+import { CategoryComponent } from './vocabulary/category/category.component';
+import { WordsComponent } from './vocabulary/words/words.component';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import { VocabularyComponent } from './vocabulary/vocabulary.component';
     SupportComponent,
     ExamsComponent,
     VocabularyComponent,
+    CategoryComponent,
+    WordsComponent,
   ],
   exports: [
     PagesComponent,

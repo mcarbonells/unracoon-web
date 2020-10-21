@@ -1,1 +1,9 @@
-<p>vocabulary works!</p>
+<ul>
+  <li *ngFor = "let word of words">
+     <h3>{{word.category}}</h3>
+     <h3>{{word.meaning}}</h3>
+     <h3>{{word.name}}</h3>
+  </li> 
+</ul>
+<a class="btn btn-primary" routerLink="/learn/vocabulary/category" role="button">Agregar Categoria</a>
+<a class="btn btn-primary" routerLink="/learn/vocabulary/words" role="button">Agregar Palabra</a>
