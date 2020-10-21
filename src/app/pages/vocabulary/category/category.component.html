@@ -1,0 +1,30 @@
+<div class= "container" >
+<h2>Vocabulario</h2>
+  <div class= "card">
+    <div class="card-header">
+        Categorias
+    </div>
+
+    <div class = "card-body">
+      <form
+        novalidate
+        [formGroup]="categoryForm"
+        (ngSubmit)="sendCategory()"
+      >
+        <div class="form-group">    
+        <div class="form-group">
+            <span for= "name">Categoria</span>
+            <input type = "text" class= "form-control" placeholder="Name" formControlName= "name">
+        </div>
+
+        <div class="form-group">
+            <span for= "level">Nivel</span>
+            <input type = "text" class= "form-control" placeholder="Level" formControlName= "level">
+        </div>
+        
+        <button class="btn btn-success" type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
