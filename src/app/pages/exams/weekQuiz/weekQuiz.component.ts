@@ -15,6 +15,7 @@ export class ExamsComponent implements OnInit {
   weekQuices: WeekQuiz[];
   weekQuizSelected: WeekQuiz;
   showDetail = false;
+  formVisible = true;
   constructor(private examsService: ExamsService,  private fb: ForumService) {
   }
 
@@ -23,12 +24,15 @@ export class ExamsComponent implements OnInit {
       this.weekQuices = response.data.allWeekQuiz;
     });
   }
-  openThread( weekQuiz: WeekQuiz ) {
+  openWeekQuiz( weekQuiz: WeekQuiz ) {
     this.weekQuizSelected = weekQuiz;
     this.showDetail = true;
   }
 
   hideDetail(event: boolean) {
     this.showDetail = event;
+  }
+  showForm() {
+    this.formVisible = true;
   }
 }

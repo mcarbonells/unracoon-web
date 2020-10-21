@@ -1,24 +1,34 @@
-<div class="container weekQuiz-container">*ngIf="!showDetail; else detail">
-  <h2>Week QUiz</h2>
-  <div class="row">
-    <div class="col-xm-6">
-      <div class="list">
-        <div class="card">
-          <div class="card-header">Lista de Week Quices</div>
-          <ul class="list-group list-group-flush">
-            <li
-              class="list-group-item list-weekQuiz"
-              *ngFor="let weekQuiz of weekQuices" (click)="openThread(thread)"
-            >
-              {{ weekQuiz.idQuiz, weekQuiz.date}}
-            </li>
-          </ul>
-        </div>
+<div class="container weekQUiz-container">
+  <div class="weekQUiz-title my-3">
+    <h1>Week Quiz</h1>
+  </div>
+
+  <div class="row weekQUiz-content mb-3">
+    <div class="col-lg-4 p-0 weekQUiz-left-panel">
+      <div class="weekQUiz-content-title px-4">
+        <h3>Week Quices</h3>
+        <button class="btn button-add" (click)="showForm()">
+        </button>
+      </div>
+      <div class="weekQUiz-content-list">
+        <ul class="list-group list-group-flush">
+          <li
+            class="list-group-item list-weekQUiz"
+            *ngFor="let weekQuiz of weekQuices"
+            (click)="openWeekQuiz(weekQuiz)"
+          >
+            <h4>{{ weekQuiz.idQuiz }}</h4>
+            <h6>{{ weekQuiz.date }}</h6>
+            <h6>{{ weekQuiz.active }}</h6>
+          </li>
+        </ul>
       </div>
     </div>
+    <div class="col-lg-8 p-0">
+      <app-userQuiz [weekQuiz]="weekQuizSelected"></app-userQuiz>
+    </div>
   </div>
+
+  <app-weekQuiz-form *ngIf="formVisible" class="weekQUiz-bottom" (closeForm)="formVisible = false"></app-weekQuiz-form>
 </div>
 
-<ng-template #detail>
-  <app-forum-detail [weekQuiz]="weekQuizSelected" (back)="hideDetail($event)"></app-forum-detail>
-</ng-template>
