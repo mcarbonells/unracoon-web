@@ -17,7 +17,7 @@ export class UsuarioService {
     return this.apollo.query({
       query: gql`
         {
-          allTickets {
+          allUsers {
             id, uid, name, nickname
           }
         }
