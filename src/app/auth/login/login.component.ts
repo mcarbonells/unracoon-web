@@ -2,9 +2,6 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
-// import Swal from 'sweetalert2';
-
-// import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 declare const gapi: any;
@@ -22,25 +19,26 @@ export class LoginComponent implements OnInit {
   public loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
-    remember: [false]
   });
 
   constructor(
     private fb: FormBuilder,
-    private usuarioService: UsuarioService
-  ) { }
+    private usuarioService: UsuarioService,
+    public router: Router,
+  ) {if (this.usuarioService.validarUser()) {
+    this.router.navigate(['/learn']);
+  } }
 
   ngOnInit(): void {
+
   }
 
-  login() {
-    console.log(this.loginForm.value);
-    this.usuarioService.registerUser(this.loginForm.value).subscribe((response)=> {
-      console.log(response)
-   })
+  async login() {
+    await this.usuarioService.loginUser(this.loginForm.value).catch((err) => {
+      alert('Datos invalidos');
+      return;
+    });
+    this.router.navigate(['/learn']);
   }
 
-
-
-  attachSignin(element) {}
 }

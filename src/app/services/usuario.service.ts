@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { User } from '../models/usuario.model';
+import { User, UserLogin, UserResponse } from '../models/usuario.model';
+import { Router } from '@angular/router';
 
 
 
@@ -10,8 +11,11 @@ import { User } from '../models/usuario.model';
 })
 export class UsuarioService {
 
-
-  constructor(private apollo: Apollo) {}
+  public user: UserLogin;
+  constructor(
+    private apollo: Apollo,
+    private router: Router
+  ) {}
 
   getAllUsers() {
     return this.apollo.query({
@@ -32,8 +36,8 @@ export class UsuarioService {
         registerUser(user: {
           email: "${user.email}",
           name: "${user.name}" ,
-          password: ${user.password},
-          password_confirmation: ${user.password_confirmation},
+          password: "${user.password}",
+          password_confirmation: "${user.password_confirmation}",
         }) {
           status
         }
@@ -48,14 +52,34 @@ export class UsuarioService {
       mutation {
         logInUser(user: {
           email: "${user.email}",
-          password: ${user.password},
-        }) {
-          id
-        
+          password: "${user.password}",
+        }) { data {
+          id, name, email
+        }
         }
       }
       `,
+    }).toPromise().then((res: UserResponse) => {
+      this.user = res.data.logInUser.data;
+      localStorage.setItem('user', JSON.stringify(this.user));
     });
+  }
+
+  validarUser() {
+    this.user = JSON.parse(localStorage.getItem('user')) || '';
+    if ( this.user ) {
+      return true;
+    } else {
+      this.router.navigateByUrl('/login');
+      return false;
+    }
+
+  }
+
+  getUser(): UserLogin{
+    console.log(this.user);
+    
+    return this.user;
   }
 
 

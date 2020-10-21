@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import {Perfil,ProfileResponse  } from 'src/app/models/user-information.model';
+import { Perfil, ProfileResponse } from 'src/app/models/user-information.model';
+import { UserLogin } from 'src/app/models/usuario.model';
 import { UserInformationService } from 'src/app/services/user-information.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -11,6 +13,7 @@ import { UserInformationService } from 'src/app/services/user-information.servic
 })
 export class PerfilComponent implements OnInit {
   perfilForm;
+  user: UserLogin;
   showEditForm = false;
   perfilSuscripcion: Subscription;
   perfiles: Perfil[];
@@ -18,17 +21,23 @@ export class PerfilComponent implements OnInit {
   showDetail = false;
   formProfileVisible = false;
 
-  constructor(private perfilService: UserInformationService,private fb: FormBuilder,) { }
+  constructor(
+    private perfilService: UserInformationService,
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+  ) {
+    this.user = this.usuarioService.getUser();
+   }
 
   ngOnInit(): void {
     this.perfilSuscripcion = this.perfilService.profileById().subscribe((response: ProfileResponse) => {
-      console.log(response);      
+      console.log(response);
       this.perfilSeleccted = response.data.profileById;
       this.datosIniciales(this.perfilSeleccted);
     });
   }
 
-  datosIniciales(perfil:Perfil){
+  datosIniciales( perfil: Perfil){
     this.perfilForm = this.fb.group({
       nombre: [perfil.nombre, Validators.required],
       segundoNombre: [perfil.segundoNombre, Validators.required],
@@ -40,8 +49,8 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  enviarPerfil(){    
-    this.perfilService.updateProfile("1",this.perfilForm.value).subscribe((response: ProfileResponse) => {
+  enviarPerfil(){
+    this.perfilService.updateProfile('1', this.perfilForm.value).subscribe((response: ProfileResponse) => {
     console.log(response);
     this.toogleForm();
     });

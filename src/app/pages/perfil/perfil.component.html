@@ -61,8 +61,10 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <div class="form-group">
-                        <button class="btn btn-info">Editar Imagen de perfil</button>                       
+                    <div class="form-group" *ngIf="user">
+                      <h3>{{user.name}}</h3>
+                      <h5>{{user.email}}</h5>
+                        <!-- <button class="btn btn-info">Editar Imagen de perfil</button>                        -->
                     </div>
                 </div>    
             </div>                        

@@ -15,9 +15,19 @@ export interface User {
     password_confirmation: string;
 }
 
+export interface Data {
+  data: User;
+}
+
+export interface UserLogin {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export interface UserData {
-  allUsers: User[];
-  registerUser: User;
+  logInUser: Data;
+  registerUser: UserLogin;
 }
 export interface UserResponse extends GeneralResponse {
   data: UserData;
