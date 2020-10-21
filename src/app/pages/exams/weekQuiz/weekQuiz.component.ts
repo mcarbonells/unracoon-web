@@ -7,10 +7,10 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-exams',
-  templateUrl: './exams.component.html',
-  styleUrls: ['./exams.component.scss']
+  templateUrl: './weekQuiz.component.html',
+  styleUrls: ['./weekQuiz.component.scss']
 })
-export class ExamsComponent implements OnInit {
+export class WeekQuizComponent implements OnInit {
   weekQuizSubscription: Subscription;
   weekQuices: WeekQuiz[];
   weekQuizSelected: WeekQuiz;

@@ -14,7 +14,7 @@ import { ThreadFormComponent } from './forum/thread-form/thread-form.component';
 import { SupportComponent } from './support/support.component';
 import { ExamsComponent } from './exams/exams.component';
 import { VocabularyComponent } from './vocabulary/vocabulary.component';
-
+import {WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { VocabularyComponent } from './vocabulary/vocabulary.component';
     SupportComponent,
     ExamsComponent,
     VocabularyComponent,
+    WeekQuizComponent
   ],
   exports: [
     PagesComponent,

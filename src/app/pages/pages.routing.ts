@@ -8,6 +8,7 @@ import { ForumComponent } from './forum/forum.component';
 import { SupportComponent } from './support/support.component';
 import { VocabularyComponent } from './vocabulary/vocabulary.component';
 import { ExamsComponent } from './exams/exams.component';
+import {WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,7 @@ const routes: Routes = [
             { path: 'support', component: SupportComponent, data: { titulo: 'Soporte' } },
             { path: 'vocabulary', component: VocabularyComponent, data: { titulo: 'Vocabulario' } },
             { path: 'exam', component: ExamsComponent, data: { titulo: 'Examenes' } },
+            {path: 'weekQuiz', component: WeekQuizComponent, data: {titulo: 'WeekQuiz'}}
         ]
     },
 ];
