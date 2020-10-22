@@ -1,21 +1,19 @@
-FROM node:12.19.0
+# base image
+FROM node:12.11.1
 
- 
+# set working directory
+WORKDIR /app
 
-WORKDIR  /app
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
- 
-
-COPY ./ /app/
-
- 
-
+# install and cache app dependencies
+COPY package.json /app/package.json
 RUN npm install
+RUN npm install -g @angular/cli@9.1.11
 
- 
+# add app
+COPY . /app
 
-EXPOSE 4200
-
- 
-
-ENTRYPOINT npm run ng serve
+# start app
+CMD ng serve 
