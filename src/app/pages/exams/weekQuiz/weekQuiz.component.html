@@ -1,0 +1,35 @@
+<div class="container weekQUiz-container">
+  <div class="weekQUiz-title my-3">
+    <h1>Week Quiz</h1>
+  </div>
+  <div class="row weekQUiz-content mb-3">
+    <div class="col-lg-4 p-0 weekQUiz-left-panel">
+      <div class="weekQUiz-content-title px-4">
+      </div>
+      <div class="weekQUiz-content-list">
+        <ul class="list-group list-group-flush">
+          <li
+            class="list-group-item list-weekQUiz"
+            *ngFor="let weekQuiz of weekQuices"
+            (click)="openWeekQuiz(weekQuiz)"
+          >
+            <h4>{{ weekQuiz.idQuiz }}</h4>
+            <h6>{{ weekQuiz.date }}</h6>
+            <h6>{{ weekQuiz.active }}</h6>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-8 p-0">
+    </div>
+  </div>
+  <button
+    class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+    type="submit"
+    (click)="createQuiz()"
+  >
+    Nuevo Quiz
+  </button>
+  <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" routerLink="/learn/weekQuiz/quiz" role="button">Realizar Week Quiz</button>
+</div>
+

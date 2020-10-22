@@ -1,1 +1,92 @@
-<p>vocabulary works!</p>
+<div class="container vocabulary-container">
+  <button
+    class="btn btn-outline-primary mt-5"
+    (click)="obtenerPalabra()"
+    *ngIf="!showWord; else wordSection"
+  >
+    Palabra alaeatoria
+  </button>
+
+  <ng-template #wordSection>
+    <div class="word-form mt-5">
+      <h3>{{ wordSelected.name }}</h3>
+      <form
+        class="form-horizontal form-material"
+        id="loginform"
+        autocomplete="off"
+        [formGroup]="wordForm"
+        (ngSubmit)="comprobarPalabra()"
+      >
+        <div class="col-xs-12">
+          <input
+            class="form-control"
+            placeholder="Significado"
+            formControlName="response"
+          />
+        </div>
+
+        <div class="col-xs-12 mt-2">
+          <button
+            class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+            type="submit"
+          >
+            Responder
+          </button>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <button
+    class="btn btn-outline-primary mt-5"
+    (click)="togglePalabras()"
+    *ngIf="!showWords; else wordsSection"
+  >
+    Mostrar palabras disponibles
+  </button>
+
+  <ng-template #wordsSection>
+    <div class="word-form words-list mt-5">
+      <h3>Palabras disponibles</h3>
+      <div class="words-list-content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Significado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let word of words">
+            <th scope="row">-</th>
+            <td>{{ word.name }}</td>
+            <td>{{ word.meaning }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button
+    class="btn btn-outline-primary mt-5"
+    (click)="togglePalabras()"
+  >
+    Cerrar
+  </button>
+    </div>
+  </ng-template>
+
+  <div class="agregar-botones">
+    <a
+      class="btn btn-primary btn-vocabulary p-2 m-3"
+      routerLink="/learn/vocabulary/category"
+      role="button"
+      >Agregar Categoria</a
+    >
+    <a
+      class="btn btn-primary btn-vocabulary p-2 m-3"
+      routerLink="/learn/vocabulary/words"
+      role="button"
+      >Agregar Palabra</a
+    >
+  </div>
+</div>

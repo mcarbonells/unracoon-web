@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
+import { faUser, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faFont } from '@fortawesome/free-solid-svg-icons';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -18,11 +19,18 @@ export class SidebarComponent implements OnInit {
   faFont = faFont;
   faUsers = faUsers;
   faInfoCircle = faInfoCircle;
+  faClose = faWindowClose;
 
 
-  constructor(  ) {  }
+  constructor( public router: Router, ) {  }
 
   ngOnInit(): void {
+  }
+
+  logOut() {
+    localStorage.removeItem('user');
+    console.log('aaa');
+    
   }
 
 }

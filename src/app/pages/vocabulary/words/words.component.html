@@ -1,0 +1,43 @@
+<div class= "container" >
+<h2>Vocabulario</h2>
+  <div class= "card">
+    <div class="card-header">
+        Palabras
+    </div>
+
+    <div class = "card-body">
+      <form
+        novalidate
+        [formGroup]="wordsForm"
+        (ngSubmit)="sendWord()"
+      >
+        <div class="form-group">
+            <label for= "name">Palabra</label>
+            <input type = "text" class= "form-control" placeholder="Name" formControlName= "name"/>
+        </div>
+
+        <div class="form-group">
+            <label for= "level">Categoria</label>
+            <input type = "text" class= "form-control" placeholder="Category" formControlName= "category">
+        </div>
+        
+        <div class="form-group">
+            <label for= "image">Imagen</label>
+            <input type = "text" class= "form-control" placeholder="Image" formControlName= "image">
+        </div>
+
+        <div class="form-group">
+            <label for= "linkW">LinkW</label>
+            <input type = "text" class= "form-control" placeholder="LinkW" formControlName= "linkW">
+        </div>
+
+        <div class="form-group">
+            <label for= "meaning">Significado</label>
+            <input type = "text" class= "form-control" placeholder="Meaning" formControlName= "meaning">
+        </div>
+
+        <button class="btn btn-success" type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>

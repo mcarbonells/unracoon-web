@@ -1,0 +1,104 @@
+.vocabulary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 100%;
+}
+
+.vocabulary-panel {
+    width: 65%;
+    border: 1px solid black;
+    height: 75vh;
+    min-height: 300px;
+    min-width: 500px;
+    box-shadow: 2px 0 7px #999;
+    overflow: hidden;
+}
+
+.button-add {
+    color: white;
+    border: 1px solid white;
+}
+
+.button-add:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.card {
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+}
+
+.vocabulary-information {
+    padding: 0px 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.vocabulary-header {
+    background-color: #636E72;
+    color: white;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%;
+    position: relative;
+}
+
+.vocabulary-content-list {
+    background-color: #DFE6E9;
+    height: 85%;
+    overflow: auto;
+}
+
+
+.list-ticket{
+    background-color: transparent;
+}
+
+.vocabulary-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-header {
+    height: 11% !important;
+}
+
+.word-form {
+    display:flex;
+    flex-direction: column;
+    width: 25%;
+    align-items: center;
+    min-width: 250px;
+}
+
+.vocabulary-container {
+    position: relative;
+}
+
+.agregar-botones {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px;
+}
+
+.words-list {
+    height: 70%;
+    border: 1px solid lightgray;
+}
+.words-list-content {
+    border-top: 1px solid lightgray;
+    overflow: auto;
+    
+}
+.words-list-content::-webkit-scrollbar {
+    display: none;
+  }

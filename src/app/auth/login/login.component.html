@@ -1,5 +1,10 @@
+<div class="container login-container">
+  <div class="login-title mb-4">
+    <img class="login-img mb-2" src="assets/images/icons/logo.svg" />
+    <h2>LOGIN</h2>
+  </div>
 <form
-  class="form-horizontal form-material"
+  class="form-horizontal form-material col-8"
   id="loginform"
   autocomplete="off"
   [formGroup]="loginForm"
@@ -7,35 +12,24 @@
 >
   <div class="form-group m-t-40">
     <div class="col-xs-12">
+      <label>Email</label>
       <input
         class="form-control"
         type="email"
-        placeholder="email"
+        placeholder="email@unal.edu.co"
         formControlName="email"
       />
     </div>
   </div>
   <div class="form-group">
     <div class="col-xs-12">
+      <label>Password</label>
       <input
         class="form-control"
         type="password"
-        placeholder="Password"
+        placeholder="*******"
         formControlName="password"
       />
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-md-12">
-      <div class="checkbox checkbox-primary pull-left p-t-0">
-        <input
-          id="checkbox-signup"
-          type="checkbox"
-          class="filled-in chk-col-light-blue"
-          formControlName="remember"
-        />
-        <label for="checkbox-signup"> Remember me </label>
-      </div>
     </div>
   </div>
   <div class="form-group text-center m-t-20">
@@ -58,8 +52,10 @@
   </div>
   <div class="form-group m-b-0">
     <div class="col-sm-12 text-center">
-      Don't have an account?
-      <a routerLink="/register" class="text-primary m-l-5"><b>Sign Up</b></a>
+      ¿No tienes una cuenta?
+      <a routerLink="/register" class="text-primary m-l-5"><b>Registrate</b></a>
     </div>
   </div>
 </form>
+
+</div>
