@@ -60,7 +60,7 @@ export class UserInformationService {
           email:"${perfil.email}",
           constrasena:"${perfil.constrasena}",
           ubicacion:"${perfil.ubicacion}",
-          descripcion:"${perfil.descripcion}"    
+          descripcion:"${perfil.descripcion}"
         })
       }
       `
@@ -75,7 +75,7 @@ export class UserInformationService {
           nombre:"${perfil.nombre}",
           apellido:"${perfil.apellido}",
           email:"${perfil.email}",
-          descripcion:"${perfil.descripcion}"    
+          descripcion:"${perfil.descripcion}"
         })
       }
       `

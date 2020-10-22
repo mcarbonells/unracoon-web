@@ -44,8 +44,6 @@ export class VocabularyComponent implements OnInit {
   }
 
   comprobarPalabra() {
-    const a = ''
-    let b = a.toLowerCase()
     if( this.wordForm.value.response.toLowerCase() === this.wordSelected.meaning.toLowerCase()){
       alert('Bien');
     } else {

@@ -28,9 +28,6 @@ export class RegisterComponent implements OnInit {
     private usuarioService: UsuarioService,
     public router: Router,
   ) {
-    if (this.usuarioService.validarUser()) {
-      this.router.navigate(['/learn']);
-    }
   }
 
   crearUsuario() {
@@ -40,7 +37,6 @@ export class RegisterComponent implements OnInit {
      this.usuarioService.registerUser(this.registerForm.value).subscribe((response) => {
          console.log(response);
       });
-
     }
   }
 
