@@ -15,8 +15,8 @@ export class VocabularyService {
       query: gql`
         {
           allCategory {
-            name 
-            level 
+            name
+            level
           }
         }
       `,
@@ -32,7 +32,7 @@ export class VocabularyService {
           name: "${category.name}",
           level: "${category.level}",
       }) {
-        name 
+        name
         level
         }
       }
@@ -68,7 +68,7 @@ export class VocabularyService {
           meaning: "${words.meaning}"
       }) {
           name
-          category 
+          category
           meaning
         }
       }

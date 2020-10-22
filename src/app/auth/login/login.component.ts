@@ -1,7 +1,9 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { UsuarioService } from 'src/app/services/usuario.service';
+
 
 
 declare const gapi: any;
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   public auth2: any;
 
   public loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: [localStorage.getItem('email') || null, [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
 
@@ -29,8 +31,8 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/learn']);
   } }
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
   }
 
   async login() {
