@@ -21,9 +21,8 @@ export class WordsComponent implements OnInit {
 
   ngOnInit(): void {
     this.wordsForm = this.fb.group({
-      //response: ['pending', Validators.required],
       name: ['', Validators.required],
-      level: ['', Validators.required],
+      category: ['', Validators.required],
       image: ['', Validators.required],
       linkW: ['', Validators.required],
       meaning: ['', Validators.required]
@@ -38,6 +37,7 @@ export class WordsComponent implements OnInit {
     this.vocabularyService.addWord(this.wordsForm.value).subscribe((response) => {
       console.log(response);
     });
+    //console.log(this.wordsForm.value)
   }
 
   showForm() {

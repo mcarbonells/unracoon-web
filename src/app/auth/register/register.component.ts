@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -23,12 +25,21 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-  ) { }
+    private usuarioService: UsuarioService,
+    public router: Router,
+  ) {
+    if (this.usuarioService.validarUser()) {
+      this.router.navigate(['/learn']);
+    }
+  }
 
   crearUsuario() {
     if (this.registerForm.invalid) {
       return;
     } else {
+     this.usuarioService.registerUser(this.registerForm.value).subscribe((response) => {
+         console.log(response);
+      });
 
     }
   }
