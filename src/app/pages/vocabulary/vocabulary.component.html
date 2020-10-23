@@ -49,29 +49,26 @@
     <div class="word-form words-list mt-5">
       <h3>Palabras disponibles</h3>
       <div class="words-list-content">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Significado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let word of words">
-            <th scope="row">-</th>
-            <td>{{ word.name }}</td>
-            <td>{{ word.meaning }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <button
-    class="btn btn-outline-primary mt-5"
-    (click)="togglePalabras()"
-  >
-    Cerrar
-  </button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Significado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let word of words">
+              <th scope="row">-</th>
+              <td>{{ word.name }}</td>
+              <td>{{ word.meaning }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-outline-primary mt-5" (click)="togglePalabras()">
+        Cerrar
+      </button>
     </div>
   </ng-template>
 

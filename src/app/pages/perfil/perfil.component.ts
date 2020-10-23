@@ -9,7 +9,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit {
   perfilForm;
@@ -24,20 +24,22 @@ export class PerfilComponent implements OnInit {
   constructor(
     private perfilService: UserInformationService,
     private fb: FormBuilder,
-    private usuarioService: UsuarioService,
+    private usuarioService: UsuarioService
   ) {
     this.user = this.usuarioService.getUser();
-   }
-
-  ngOnInit(): void {
-    this.perfilSuscripcion = this.perfilService.profileById().subscribe((response: ProfileResponse) => {
-      console.log(response);
-      this.perfilSeleccted = response.data.profileById;
-      this.datosIniciales(this.perfilSeleccted);
-    });
   }
 
-  datosIniciales( perfil: Perfil){
+  ngOnInit(): void {
+    this.perfilSuscripcion = this.perfilService
+      .profileById()
+      .subscribe((response: ProfileResponse) => {
+        console.log(response);
+        this.perfilSeleccted = response.data.profileById;
+        this.datosIniciales(this.perfilSeleccted);
+      });
+  }
+
+  datosIniciales(perfil: Perfil) {
     this.perfilForm = this.fb.group({
       nombre: [perfil.nombre, Validators.required],
       segundoNombre: [perfil.segundoNombre, Validators.required],
@@ -49,15 +51,16 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  enviarPerfil(){
-    this.perfilService.updateProfile('1', this.perfilForm.value).subscribe((response: ProfileResponse) => {
-    console.log(response);
-    this.toogleForm();
-    });
+  enviarPerfil() {
+    this.perfilService
+      .updateProfile('1', this.perfilForm.value)
+      .subscribe((response: ProfileResponse) => {
+        console.log(response);
+        this.toogleForm();
+      });
   }
 
-  toogleForm(){
+  toogleForm() {
     this.showEditForm = !this.showEditForm;
   }
 }
-

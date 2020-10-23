@@ -29,8 +29,6 @@ export class SidebarComponent implements OnInit {
 
   logOut() {
     localStorage.removeItem('user');
-    console.log('aaa');
-    
   }
 
 }

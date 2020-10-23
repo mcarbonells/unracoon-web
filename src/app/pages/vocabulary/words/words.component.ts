@@ -6,18 +6,17 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-words',
   templateUrl: './words.component.html',
-  styleUrls: ['./words.component.scss']
+  styleUrls: ['./words.component.scss'],
 })
 export class WordsComponent implements OnInit {
-
   words: Words[];
   wordsForm;
   formVisible = false;
 
   constructor(
     private vocabularyService: VocabularyService,
-    private fb: FormBuilder,
-  ) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.wordsForm = this.fb.group({
@@ -25,19 +24,22 @@ export class WordsComponent implements OnInit {
       category: ['', Validators.required],
       image: ['', Validators.required],
       linkW: ['', Validators.required],
-      meaning: ['', Validators.required]
+      meaning: ['', Validators.required],
     });
 
-    this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
-      this.words = response.data.allWords;
-    });
+    this.vocabularyService
+      .getAllWords()
+      .subscribe((response: WordsResponse) => {
+        this.words = response.data.allWords;
+      });
   }
 
   sendWord() {
-    this.vocabularyService.addWord(this.wordsForm.value).subscribe((response) => {
-      console.log(response);
-    });
-    //console.log(this.wordsForm.value)
+    this.vocabularyService
+      .addWord(this.wordsForm.value)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   showForm() {

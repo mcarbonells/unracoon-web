@@ -23,7 +23,6 @@ export class SupportService {
   }
 
   addTicket(ticket: Ticket) {
-    console.log('aaa');
     return this.apollo.mutate({
       mutation: gql`
       mutation {

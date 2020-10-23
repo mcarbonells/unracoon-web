@@ -6,10 +6,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-vocabulary',
   templateUrl: './vocabulary.component.html',
-  styleUrls: ['./vocabulary.component.scss']
+  styleUrls: ['./vocabulary.component.scss'],
 })
 export class VocabularyComponent implements OnInit {
-
   words: Words[];
   wordSelected: Words;
   showWord = false;
@@ -18,14 +17,16 @@ export class VocabularyComponent implements OnInit {
 
   constructor(
     private vocabularyService: VocabularyService,
-    private fb: FormBuilder,
-  ) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
-      this.words = response.data.allWords;
-      console.log(response);
-    });
+    this.vocabularyService
+      .getAllWords()
+      .subscribe((response: WordsResponse) => {
+        this.words = response.data.allWords;
+        console.log(response);
+      });
     this.wordForm = this.fb.group({
       response: ['', Validators.required],
     });
@@ -44,7 +45,10 @@ export class VocabularyComponent implements OnInit {
   }
 
   comprobarPalabra() {
-    if( this.wordForm.value.response.toLowerCase() === this.wordSelected.meaning.toLowerCase()){
+    if (
+      this.wordForm.value.response.toLowerCase() ===
+      this.wordSelected.meaning.toLowerCase()
+    ) {
       alert('Bien');
     } else {
       alert(`Mal, la respuesta correcta es ${this.wordSelected.meaning}`);
@@ -56,5 +60,4 @@ export class VocabularyComponent implements OnInit {
   togglePalabras() {
     this.showWords = !this.showWords;
   }
-
 }

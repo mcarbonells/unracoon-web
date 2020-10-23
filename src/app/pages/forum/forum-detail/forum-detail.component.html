@@ -19,9 +19,9 @@
   </div>
 
   <div class="forum-detail-entrys">
-    <div class="no-thread" *ngIf="entrys.length === 0" >
-        <img class="no-thread-img mb-2" src="assets/images/icons/foro.svg" />
-        <h3>No hay entradas</h3>
+    <div class="no-thread" *ngIf="entrys.length === 0">
+      <img class="no-thread-img mb-2" src="assets/images/icons/foro.svg" />
+      <h3>No hay entradas</h3>
     </div>
     <ul class="entrys-list">
       <li *ngFor="let entry of entrys">
@@ -40,7 +40,7 @@
     </ul>
   </div>
 
-  <div class="form-bottom" *ngIf ="formVisible">
+  <div class="form-bottom" *ngIf="formVisible">
     <div class="card mx-2 form-card">
       <div class="card-header">
         <h3>Agregar Entrada</h3>
@@ -50,20 +50,21 @@
       </div>
       <div class="card-body">
         <form
-        id="loginform"
-        autocomplete="off"
-        [formGroup]="entryForm"
-        (ngSubmit)="sendEntry()"
-      >
+          id="loginform"
+          autocomplete="off"
+          [formGroup]="entryForm"
+          (ngSubmit)="sendEntry()"
+        >
           <div class="col-xs-12 form-content-bottom">
             <label class="form-label"> Mensaje</label>
             <textarea
               class="form-control textarea-form"
               placeholder="Message"
               formControlName="message"
-            > </textarea>
+            >
+            </textarea>
           </div>
-    
+
           <div class="col-xs-12 button-form-bottom">
             <button
               class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
@@ -72,13 +73,10 @@
               Enviar
             </button>
           </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>
-
-  
- 
 </div>
 
 <ng-template #noThread>

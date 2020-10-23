@@ -10,10 +10,9 @@ import { UserLogin } from 'src/app/models/usuario.model';
 @Component({
   selector: 'app-support',
   templateUrl: './support.component.html',
-  styleUrls: ['./support.component.scss']
+  styleUrls: ['./support.component.scss'],
 })
 export class SupportComponent implements OnInit {
-
   tickets: Ticket[];
   ticketForm;
   formVisible = false;
@@ -24,7 +23,7 @@ export class SupportComponent implements OnInit {
   constructor(
     private supportService: SupportService,
     private fb: FormBuilder,
-    private usuarioService: UsuarioService,
+    private usuarioService: UsuarioService
   ) {
     this.user = this.usuarioService.getUser();
   }
@@ -34,19 +33,22 @@ export class SupportComponent implements OnInit {
       response: ['pending', Validators.required],
       issue: ['', Validators.required],
       section: ['', Validators.required],
-      userName: [this.user.name, Validators.required]
+      userName: [this.user.name, Validators.required],
     });
 
-    this.supportService.getAllTickets().subscribe((response: TicketResponse) => {
-      this.tickets = response.data.allTickets;
-    });
+    this.supportService
+      .getAllTickets()
+      .subscribe((response: TicketResponse) => {
+        this.tickets = response.data.allTickets;
+      });
   }
 
-
   sendTicket() {
-    this.supportService.addTicket(this.ticketForm.value).subscribe((response) => {
-      console.log(response);
-    });
+    this.supportService
+      .addTicket(this.ticketForm.value)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   showForm() {
@@ -56,5 +58,4 @@ export class SupportComponent implements OnInit {
   close() {
     this.formVisible = false;
   }
-
 }

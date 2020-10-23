@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Entry, EntryResponse, Thread } from 'src/app/models/forum.model';
 import { ForumService } from 'src/app/services/forum.service';
@@ -10,10 +16,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-forum-detail',
   templateUrl: './forum-detail.component.html',
-  styleUrls: ['./forum-detail.component.scss']
+  styleUrls: ['./forum-detail.component.scss'],
 })
 export class ForumDetailComponent implements OnInit, OnChanges {
-
   @Input() thread: Thread;
   public entryForm;
   faPlus = faPlus;
@@ -24,7 +29,7 @@ export class ForumDetailComponent implements OnInit, OnChanges {
   constructor(
     private forumService: ForumService,
     private fb: FormBuilder,
-    private usuarioService: UsuarioService,
+    private usuarioService: UsuarioService
   ) {
     this.user = this.usuarioService.getUser();
   }
@@ -48,23 +53,26 @@ export class ForumDetailComponent implements OnInit, OnChanges {
         userName: [this.user.name, Validators.required],
         userId: [this.user.id, Validators.required],
       });
-      this.forumService.getEntrysThread(this.thread._id).subscribe((data: EntryResponse) => {
-        this.entrys = data.data.entryThread;
-      });
+      this.forumService
+        .getEntrysThread(this.thread._id)
+        .subscribe((data: EntryResponse) => {
+          this.entrys = data.data.entryThread;
+        });
     }
   }
 
   sendEntry() {
-    this.forumService.addEntry(this.entryForm.value).subscribe((response: EntryResponse) => {
-      console.log(response.data.createEntry );
-      this.formVisible = false;
-    });
+    this.forumService
+      .addEntry(this.entryForm.value)
+      .subscribe((response: EntryResponse) => {
+        console.log(response.data.createEntry);
+        this.formVisible = false;
+      });
   }
 
   showForm() {
-    if ( this.thread ) {
+    if (this.thread) {
       this.formVisible = true;
     }
   }
-
 }

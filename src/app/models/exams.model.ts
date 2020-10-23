@@ -37,7 +37,7 @@ export interface WeekQuizData {
   deleteWeekQuiz: WeekQuiz;
 }
 
-export interface WeekQuizResponse extends GeneralResponse{
+export interface WeekQuizResponse extends GeneralResponse {
   data: WeekQuizData;
 }
 
@@ -59,6 +59,6 @@ export interface UserQuizData {
   deleteUserQuiz: UserQuiz;
 }
 
-export interface UserQuizResponse extends GeneralResponse{
+export interface UserQuizResponse extends GeneralResponse {
   data: UserQuizData;
 }

@@ -8,7 +8,7 @@
       <div class="forum-content-title px-4">
         <h3>Debates</h3>
         <button class="btn button-add" (click)="showForm()">
-            <fa-icon class="fa-icon" [icon]="faPlus"></fa-icon>
+          <fa-icon class="fa-icon" [icon]="faPlus"></fa-icon>
         </button>
       </div>
       <div class="forum-content-list">
@@ -29,5 +29,9 @@
     </div>
   </div>
 
-  <app-thread-form *ngIf="formVisible" class="form-bottom" (closeForm)="formVisible = false"></app-thread-form>
+  <app-thread-form
+    *ngIf="formVisible"
+    class="form-bottom"
+    (closeForm)="formVisible = false"
+  ></app-thread-form>
 </div>

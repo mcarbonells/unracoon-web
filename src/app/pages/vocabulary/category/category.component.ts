@@ -6,18 +6,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-
   category: Category[];
   categoryForm;
   formVisible = false;
 
   constructor(
     private vocabularyService: VocabularyService,
-    private fb: FormBuilder,
-  ) { }
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.categoryForm = this.fb.group({
@@ -25,15 +24,19 @@ export class CategoryComponent implements OnInit {
       level: ['', Validators.required],
     });
 
-    this.vocabularyService.getAllCategory().subscribe((response: CategoryResponse) => {
-      this.category = response.data.allCategory;
-    });
+    this.vocabularyService
+      .getAllCategory()
+      .subscribe((response: CategoryResponse) => {
+        this.category = response.data.allCategory;
+      });
   }
 
   sendCategory() {
-    this.vocabularyService.addCategory(this.categoryForm.value).subscribe((response) => {
-      console.log(response);
-    });
+    this.vocabularyService
+      .addCategory(this.categoryForm.value)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   showForm() {

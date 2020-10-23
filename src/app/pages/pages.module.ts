@@ -16,9 +16,10 @@ import { ExamsComponent } from './exams/exams.component';
 import { VocabularyComponent } from './vocabulary/vocabulary.component';
 import { CategoryComponent } from './vocabulary/category/category.component';
 import { WordsComponent } from './vocabulary/words/words.component';
-import {WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
-import {UserQUizComponent} from './exams/userQuiz/userQuiz.component';
-import {UserQuizFormComponent} from './exams/userQuiz/userQuiz-form/userQuiz-form.component'
+import { WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
+import { UserQUizComponent} from './exams/userQuiz/userQuiz.component';
+import { UserQuizFormComponent} from './exams/userQuiz/userQuiz-form/userQuiz-form.component';
+import { LevelsComponent } from './levels/levels.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {UserQuizFormComponent} from './exams/userQuiz/userQuiz-form/userQuiz-for
     UserQUizComponent,
     UserQuizFormComponent,
     CategoryComponent,
-    WordsComponent
+    WordsComponent,
+    LevelsComponent
   ],
   exports: [
     PagesComponent,

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { SettingsService } from '../services/settings.service';
 
 
 @Component({
@@ -10,9 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
-  constructor(
-    // private settingsService: SettingsService,
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
 

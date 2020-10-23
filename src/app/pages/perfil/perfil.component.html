@@ -1,83 +1,120 @@
-<div class="container perfil-container" >
-  <br>
-  <br>
-    <h2 class="card-title">My Profile</h2>
-    <div class="row">        
-        <div class="col">
-          <div *ngIf= "!showEditForm; else editForm" >
-            <div class="card">
-              <h5 class="card-header">{{perfilSeleccted.nombre}}'s  Profile</h5>
-              <div class="card-body">
-                <form>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Nombre:</label>
-                    <div class="col-sm-4">
-                      <label ><h6>{{perfilSeleccted.nombre}}</h6></label>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Segundo Nombre:</label>
-                    <div class="col-sm-4">
-                      <label ><h6>{{perfilSeleccted.segundoNombre}}</h6></label>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Apellido:</label>
-                    <div class="col-sm-4">
-                      <label ><h6>{{perfilSeleccted.apellido}}</h6></label>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Segundo Apellido:</label>
-                    <div class="col-sm-4">
-                      <label ><h6>{{perfilSeleccted.segundoApellido}}</h6> </label>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Email:</label>
-                    <div class="col-sm-4">
-                      <label ><h6>{{perfilSeleccted.email}}</h6></label>
-                    </div>
-                  </div><div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Ubicación:</label>
-                    <div class="col-sm-4">
-                      <label ><h6>{{perfilSeleccted.ubicacion}}</h6></label>
-                    </div>
-                  </div><div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Descripcion:</label>
-                    <div class="col-sm-4">
-                      <label ><h6>{{perfilSeleccted.descripcion}}</h6></label>
-                    </div>
-                  </div>
-                </form>
-                <button (click)="toogleForm()" class="btn btn-info">Editar perfil</button>
+<div class="container perfil-container">
+  <br />
+  <br />
+  <h2 class="card-title">My Profile</h2>
+  <div class="row">
+    <div class="col">
+      <div *ngIf="!showEditForm; else editForm">
+        <div class="card">
+          <h5 class="card-header">{{ perfilSeleccted.nombre }}'s Profile</h5>
+          <div class="card-body">
+            <form>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label"
+                  >Nombre:</label
+                >
+                <div class="col-sm-4">
+                  <label
+                    ><h6>{{ perfilSeleccted.nombre }}</h6></label
+                  >
+                </div>
               </div>
-            </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label"
+                  >Segundo Nombre:</label
+                >
+                <div class="col-sm-4">
+                  <label
+                    ><h6>{{ perfilSeleccted.segundoNombre }}</h6></label
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label"
+                  >Apellido:</label
+                >
+                <div class="col-sm-4">
+                  <label
+                    ><h6>{{ perfilSeleccted.apellido }}</h6></label
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label"
+                  >Segundo Apellido:</label
+                >
+                <div class="col-sm-4">
+                  <label
+                    ><h6>{{ perfilSeleccted.segundoApellido }}</h6>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label"
+                  >Email:</label
+                >
+                <div class="col-sm-4">
+                  <label
+                    ><h6>{{ perfilSeleccted.email }}</h6></label
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label"
+                  >Ubicación:</label
+                >
+                <div class="col-sm-4">
+                  <label
+                    ><h6>{{ perfilSeleccted.ubicacion }}</h6></label
+                  >
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-4 col-form-label"
+                  >Descripcion:</label
+                >
+                <div class="col-sm-4">
+                  <label
+                    ><h6>{{ perfilSeleccted.descripcion }}</h6></label
+                  >
+                </div>
+              </div>
+            </form>
+            <button (click)="toogleForm()" class="btn btn-info">
+              Editar perfil
+            </button>
           </div>
         </div>
-        <div class="col">
-            <div class="row">
-                <img src="../../../assets/images/background/emptyPic.jpg" class="img-thumbnail border border-light text-align: center" alt="Responsive image">            
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="form-group" *ngIf="user">
-                      <h3>{{user.name}}</h3>
-                      <h5>{{user.email}}</h5>
-                        <!-- <button class="btn btn-info">Editar Imagen de perfil</button>                        -->
-                    </div>
-                </div>    
-            </div>                        
-        </div>
+      </div>
     </div>
-    
-
+    <div class="col">
+      <div class="row">
+        <img
+          src="../../../assets/images/background/emptyPic.jpg"
+          class="img-thumbnail border border-light text-align: center"
+          alt="Responsive image"
+        />
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <div class="form-group" *ngIf="user">
+            <h3>{{ user.name }}</h3>
+            <h5>{{ user.email }}</h5>
+            <!-- <button class="btn btn-info">Editar Imagen de perfil</button>                        -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <ng-template #editForm>
-    <form
-    id="loginform" autocomplete="off" [formGroup]="perfilForm" (ngSubmit)="enviarPerfil()">
-    
+  <form
+    id="loginform"
+    autocomplete="off"
+    [formGroup]="perfilForm"
+    (ngSubmit)="enviarPerfil()"
+  >
     <div class="form-group m-t-40">
       <div class="col-xs-12">
         <input
@@ -119,38 +156,41 @@
     </div>
 
     <div class="form-group m-t-40">
-        <div class="col-xs-12">
-          <input
-            class="form-control"
-            placeholder="email"
-            formControlName="email"
-          />
-        </div>
+      <div class="col-xs-12">
+        <input
+          class="form-control"
+          placeholder="email"
+          formControlName="email"
+        />
       </div>
+    </div>
 
-      <div class="form-group m-t-40">
-        <div class="col-xs-12">
-          <input
-            class="form-control"
-            placeholder="ubicacion"
-            formControlName="ubicacion"
-          />
-        </div>
+    <div class="form-group m-t-40">
+      <div class="col-xs-12">
+        <input
+          class="form-control"
+          placeholder="ubicacion"
+          formControlName="ubicacion"
+        />
       </div>
+    </div>
 
-      <div class="form-group m-t-40">
-        <div class="col-xs-12">
-          <input
-            class="form-control"
-            placeholder="descripcion"
-            formControlName="descripcion"
-          />
-        </div>
+    <div class="form-group m-t-40">
+      <div class="col-xs-12">
+        <input
+          class="form-control"
+          placeholder="descripcion"
+          formControlName="descripcion"
+        />
       </div>
+    </div>
 
     <div class="form-group text-center m-t-20">
       <div class="col-xs-12">
-        <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" type="submit" >
+        <button
+          class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+          type="submit"
+        >
           Actualizar
         </button>
         <button (click)="toogleForm()" class="btn btn-danger">Cancelar</button>
