@@ -4,7 +4,6 @@ import { ExamsService } from 'src/app/services/exams.service';
 import { Subscription } from 'rxjs';
 import {VocabularyService} from 'src/app/services/vocabulary.service';
 import {WordsResponse, Words} from 'src/app/models/vocabulary.model';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-exams',
@@ -18,15 +17,14 @@ export class WeekQuizComponent implements OnInit {
   vocabularioSubscription: Subscription;
   weekQuiz;
   word: Words[];
-  faPlus = faPlus;
   showDetail = false;
   constructor(private examsService: ExamsService, private vocabularyService: VocabularyService) {
   }
-  ngOnInit(): void {
-    this.weekQuizSubscription = this.examsService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
+  async ngOnInit(): Promise<void> {
+    this.weekQuizSubscription = await this.examsService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
       this.weekQuices = response.data.allWeekQuiz;
     });
-    this.vocabularioSubscription = this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
+    this.vocabularioSubscription = await this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
       this.word = response.data.allWords;
       console.log(response, this.word);
     });
@@ -39,22 +37,21 @@ export class WeekQuizComponent implements OnInit {
   hideDetail(event: boolean) {
     this.showDetail = event;
   }
-  createQuiz() {
-    const words = Array;
+  async createQuiz() {
+    this.weekQuizSubscription = await this.examsService.updateWeekQuiz().subscribe((response: WeekQuizResponse) => {
+      console.log(response.data.updateWeekQuiz);
+    });
+    const words = [];
     let n;
     for (let i = 0; i < 10; i++) {
       n = this.randomIntFromInterval(0, this.word.length);
       words[i] = this.word[n].name;
     }
-    this.weekQuiz = {
-      words: [''],
-      idQuiz: 0
-    };
     this.weekQuiz.words = words;
     this.weekQuiz.idQuiz = this.randomIntFromInterval(0, 1234);
     console.log(this.weekQuiz);
     console.log(this.weekQuiz);
-    this.weekQuizSubscription = this.examsService.createWeekQuiz(this.weekQuiz).subscribe((response: WeekQuizResponse) => {
+    this.weekQuizSubscription = await this.examsService.createWeekQuiz(this.weekQuiz).subscribe((response: WeekQuizResponse) => {
       console.log(response.data.createWeekQuiz);
     });
   }

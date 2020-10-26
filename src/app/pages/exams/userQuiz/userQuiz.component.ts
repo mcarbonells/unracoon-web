@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ExamsService} from 'src/app/services/exams.service';
 import { Subscription } from 'rxjs';
-import {UserQuiz, UserQuizResponse, UserQuizData} from 'src/app/models/exams.model';
+import {UserQuiz, UserQuizResponse} from 'src/app/models/exams.model';
+import {UserInformationService} from 'src/app/services/user-information.service';
 
 
 @Component({
@@ -12,11 +13,10 @@ import {UserQuiz, UserQuizResponse, UserQuizData} from 'src/app/models/exams.mod
 export class UserQUizComponent implements OnInit {
  userQuizes: UserQuiz[];
  userQuizSubscription: Subscription;
-  showDetail = false;
-  constructor(private examsService: ExamsService) {
+  constructor(private examsService: ExamsService, private userInformationService: UserInformationService) {
   }
-  ngOnInit(): void {
-    this.userQuizSubscription = this.examsService.allUserQuiz().subscribe((response: UserQuizResponse) => {
+  async ngOnInit(): Promise<void> {
+    this.userQuizSubscription = await this.examsService.allUserQuiz().subscribe((response: UserQuizResponse) => {
       this.userQuizes = response.data.allUserQuiz;
     });
   }
