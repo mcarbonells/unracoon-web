@@ -18,10 +18,12 @@ import {UserLogin} from 'src/app/models/usuario.model';
 export class ExamsLevelComponent implements OnInit {
   examsLevelForm;
   examLevel: ExamLevel;
+  examLevelB: ExamLevel;
   word: Words[];
   words = [];
   wordB: Words;
   user: UserLogin;
+  done: boolean;
   @Output() closeForm = new EventEmitter<any>();
   constructor(
     private examService: ExamsService,
@@ -56,6 +58,13 @@ export class ExamsLevelComponent implements OnInit {
       n = this.randomIntFromInterval(0, this.word.length);
       this.words[i] = this.word[n].name;
     }
+    this.examLevelB.userId = this.user.id;
+    this.examLevelB.level = 'A1';
+    await this.examService.examById(this.examLevelB).subscribe((response: ExamLevelResponse) => {
+      if (response.data.examById.length !== 0){
+        this.done = true;
+      }
+    });
   }
   async sendQuiz(){
     const words1 = [];
@@ -96,9 +105,16 @@ export class ExamsLevelComponent implements OnInit {
     else{
       this.examLevel.pass = false;
     }
-    await this.examService.createExam(this.examLevel).subscribe((response: ExamLevelResponse) => {
-      console.log(response.data.createExam);
-    });
+    if (this.done){
+      await this.examService.updateExam(this.examLevel).subscribe((response: ExamLevelResponse) => {
+        console.log(response.data.updateExam);
+      });
+    }
+    else{
+      await this.examService.createExam(this.examLevel).subscribe((response: ExamLevelResponse) => {
+        console.log(response.data.createExam);
+      });
+    }
   }
   private randomIntFromInterval(min, max): number {
     return Math.floor(Math.random() * (max - min + 1) + min);

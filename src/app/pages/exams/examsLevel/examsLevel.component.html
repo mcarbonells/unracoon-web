@@ -1,0 +1,69 @@
+<div class= "container" >
+  <h2>Exam Level A1</h2>
+  <div class= "card">
+    <div class="card-header">
+      Exam
+    </div>
+
+    <div class = "card-body">
+
+      <form
+        novalidate
+        [formGroup]="examsLevelForm"
+        [ngModel]="words"
+      >
+        <div class="form-group">
+          <label class="form-label"> {{words[0]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 1" formControlName= "word1"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label"> {{words[1]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 2" formControlName= "word2"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[2]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 3" formControlName= "word3"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[3]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 4" formControlName= "word4"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[4]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 5" formControlName= "word5"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[5]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 6" formControlName= "word6"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[6]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 7" formControlName= "word7"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[7]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 8" formControlName= "word8"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[8]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 9" formControlName= "word9"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[9]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 10" formControlName= "word10"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[10]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 11" formControlName= "word11"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label"> {{words[11]}}</label>
+          <input type = "text" class= "form-control" placeholder="Word 12" formControlName= "word12"/>
+        </div>
+
+        <button class="btn btn-success" (click)="close()" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
