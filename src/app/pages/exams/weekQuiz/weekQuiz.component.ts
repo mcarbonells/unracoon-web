@@ -15,14 +15,20 @@ export class WeekQuizComponent implements OnInit {
   weekQuizSelected: WeekQuiz;
   weekQuizSubscription: Subscription;
   vocabularioSubscription: Subscription;
-  weekQuiz;
+  weekQuiz: {
+    words: any[],
+    idQuiz: number
+  };
   word: Words[];
+  wordSelect: Words;
   showDetail = false;
   constructor(private examsService: ExamsService, private vocabularyService: VocabularyService) {
+    this.weekQuiz = {words: [], idQuiz: 0};
   }
   async ngOnInit(): Promise<void> {
     this.weekQuizSubscription = await this.examsService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
       this.weekQuices = response.data.allWeekQuiz;
+      console.log(response.data.allWeekQuiz);
     });
     this.vocabularioSubscription = await this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
       this.word = response.data.allWords;
@@ -44,12 +50,13 @@ export class WeekQuizComponent implements OnInit {
     const words = [];
     let n;
     for (let i = 0; i < 10; i++) {
-      n = this.randomIntFromInterval(0, this.word.length);
-      words[i] = this.word[n].name;
+      n = this.randomIntFromInterval(0, this.word.length - 1);
+      this.wordSelect = this.word[n];
+      words[i] = this.wordSelect.name;
     }
+    console.log(words);
     this.weekQuiz.words = words;
     this.weekQuiz.idQuiz = this.randomIntFromInterval(0, 1234);
-    console.log(this.weekQuiz);
     console.log(this.weekQuiz);
     this.weekQuizSubscription = await this.examsService.createWeekQuiz(this.weekQuiz).subscribe((response: WeekQuizResponse) => {
       console.log(response.data.createWeekQuiz);

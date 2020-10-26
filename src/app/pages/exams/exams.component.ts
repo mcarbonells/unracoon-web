@@ -11,16 +11,20 @@ import {UserLogin} from 'src/app/models/usuario.model';
   styleUrls: ['./exams.component.scss'],
 })
 export class ExamsComponent implements OnInit {
-  examsLevel1: ExamLevel;
-  examLevel: ExamLevel;
+  examLevel: {
+  userId: number,
+  level: string
+};
   examsLevels: ExamLevel[];
   user: UserLogin;
   userQuizes: UserQuiz[];
-  userQuiz: UserQuiz;
+  userQuiz: {userId: number};
   userQuizSubscription: Subscription;
   examsLevelSubscription: Subscription;
   constructor(private examsService: ExamsService, private usuarioService: UsuarioService) {
     this.user = this.usuarioService.getUser();
+    this.examLevel = {userId: 0, level: ''};
+    this.userQuiz = {userId: 0};
   }
 
   async ngOnInit(): Promise<void> {

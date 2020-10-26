@@ -121,7 +121,9 @@ export class ExamsService {
   weekQuizById(){
     return this.apollo.query({
       query: gql`{
-          weekQuizById() {
+          weekQuizById(body:{
+            active: true
+          }) {
               idQuiz,
               words,
               date,
@@ -153,7 +155,9 @@ export class ExamsService {
     return this.apollo.mutate({
       mutation: gql`
         mutation {
-          updateWeekQuiz()
+          updateWeekQuiz(body:{
+            active: true
+          })
            {
             idQuiz,
             words,
@@ -167,7 +171,9 @@ export class ExamsService {
     return this.apollo.mutate({
       mutation: gql`
         mutation {
-          deleteWeekQuiz()
+          deleteWeekQuiz(body:{
+            active: true
+          })
            {
             idQuiz,
             words,

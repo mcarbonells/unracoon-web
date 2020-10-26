@@ -18,7 +18,10 @@ import {UserLogin} from 'src/app/models/usuario.model';
 export class ExamsLevelComponent implements OnInit {
   examsLevelForm;
   examLevel: ExamLevel;
-  examLevelB: ExamLevel;
+  examLevelB: {
+    userId: number,
+    level: string
+  };
   word: Words[];
   words = [];
   wordB: Words;
@@ -32,6 +35,7 @@ export class ExamsLevelComponent implements OnInit {
     private vocabularyService: VocabularyService
   ) {
     this.user = this.usuarioService.getUser();
+    this.examLevelB = {userId: 0, level: ''};
   }
 
   async ngOnInit(): Promise<void> {
