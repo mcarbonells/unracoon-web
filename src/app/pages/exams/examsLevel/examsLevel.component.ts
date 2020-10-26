@@ -6,12 +6,14 @@ import { ExamsService } from 'src/app/services/exams.service';
 import {VocabularyService} from 'src/app/services/vocabulary.service';
 import {ExamLevel, ExamLevelResponse} from 'src/app/models/exams.model';
 // @ts-ignore
+import {Words, WordsResponse} from 'src/app/models/vocabulary.model';
+// @ts-ignore
 import {UserLogin} from 'src/app/models/usuario.model';
 
 @Component({
-  selector: 'app-userquiz-form',
-  templateUrl: './userQuiz-form.component.html',
-  styleUrls: ['./userQuiz-form.component.scss']
+  selector: 'app-examslevel',
+  templateUrl: './examsLevel.component.html',
+  styleUrls: ['./examsLevel.component.scss']
 })
 export class ExamsLevelComponent implements OnInit {
   examsLevelForm;
