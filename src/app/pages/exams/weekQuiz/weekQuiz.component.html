@@ -13,8 +13,11 @@
             *ngFor="let weekQuiz of weekQuices"
             (click)="openWeekQuiz(weekQuiz)"
           >
-            <h4>{{ weekQuiz.idQuiz }}</h4>
+            <h4>Id Quiz: </h4>
+            <h6>{{ weekQuiz.idQuiz }}</h6>
+            <h4>Fecha Quiz: </h4>
             <h6>{{ weekQuiz.date }}</h6>
+            <h4>Quiz Activo: </h4>
             <h6>{{ weekQuiz.active }}</h6>
           </li>
         </ul>

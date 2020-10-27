@@ -1,10 +1,14 @@
 <ul>
   <li *ngFor = "let userQuiz of userQuizes">
-    <h3>{{userQuiz.idQuiz}}</h3>
-    <h3>{{userQuiz.userId}}</h3>
-    <h3>{{userQuiz.date}}</h3>
-    <h3>{{userQuiz.words}}</h3>
-    <h3>{{userQuiz.correctWords}}</h3>
-    <h3>{{userQuiz.score}}</h3>
+    <h4>Id Quiz: </h4>
+    <h6>{{userQuiz.idQuiz}}</h6>
+    <h4>User Id: </h4>
+    <h6>{{userQuiz.userId}}</h6>
+    <h4>Fecha realizacion Quiz: </h4>
+    <h6>{{userQuiz.date}}</h6>
+    <h4>Palabras dentro del quiz: </h4>
+    <h6>{{userQuiz.words}}</h6>
+    <h4>Puntaje: </h4>
+    <h6>{{userQuiz.score}}</h6>
   </li>
 </ul>

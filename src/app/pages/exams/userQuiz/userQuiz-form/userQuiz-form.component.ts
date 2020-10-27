@@ -16,10 +16,14 @@ import {UserLogin} from 'src/app/models/usuario.model';
 export class UserQuizFormComponent implements OnInit {
   userQuizForm;
   userQuiz: UserQuiz;
-  wordsB: Words;
+  wordsB: any;
+  words: Words[];
   weekQuiz: WeekQuiz[];
+  weekQ: WeekQuiz;
+  thisWeekQuiz: any;
   userQuizSubscription: Subscription;
   user: UserLogin;
+  showQuiz = false;
   @Output() closeForm = new EventEmitter<any>();
   constructor(
     private examService: ExamsService,
@@ -43,9 +47,35 @@ export class UserQuizFormComponent implements OnInit {
       word9: ['', Validators.required],
       word10: ['', Validators.required],
     });
-    this.userQuizSubscription = await this.examService.weekQuizById().subscribe((response: WeekQuizResponse) => {
-      this.weekQuiz = response.data.weekQuizById;
+    this.userQuizSubscription = await this.examService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
+      this.weekQuiz = response.data.allWeekQuiz;
     });
+    await this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
+      this.words = response.data.allWords;
+    });
+  }
+  async optenerQuiz(){
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.weekQuiz.length; i++){
+      const quizSelected = this.weekQuiz[i];
+      if (quizSelected.active === true){
+        this.weekQ = quizSelected;
+        this.thisWeekQuiz = quizSelected.words;
+      }
+    }
+    const quizWM = [];
+    for (let i = 0; i < 10; i++){
+      // tslint:disable-next-line:prefer-for-of
+      for (let j = 0; j < this.words.length; j++){
+        if (this.words[j].name === this.thisWeekQuiz[i]){
+          quizWM[i] = this.words[j].meaning;
+          break;
+        }
+      }
+    }
+    console.log(quizWM);
+    this.wordsB = quizWM;
+    this.showQuiz = true;
   }
   async sendQuiz(){
     const words = [];
@@ -59,33 +89,35 @@ export class UserQuizFormComponent implements OnInit {
     words[7] = this.userQuizForm.value.word8.toLowerCase();
     words[8] = this.userQuizForm.value.word9.toLowerCase();
     words[9] = this.userQuizForm.value.word10.toLowerCase();
-    let nameWord: Words;
-    const correctWords = [];
-    let score = 0;
+    const correctWords1 = [];
+    let score1 = 0;
+    console.log(words);
     for (let i = 0; i < 10; i++){
-      this.wordsB.name = this.weekQuiz[0].words[i];
-      await this.vocabularyService.getWordByName(this.wordsB).subscribe((response: WordsResponse) => {
-        nameWord = response.data.getWordByName[0];
-      });
-      if (nameWord.meaning === words[i]){
-        score = score + 100;
-        correctWords[i] = words[i];
+      if ( this.wordsB[i].toLowerCase() === words[i]){
+        score1 = score1 + 100;
+        correctWords1[i] = this.thisWeekQuiz[i];
       }
+      console.log(correctWords1, score1);
     }
+    let uQuiz: {
+      userId: number,
+      idQuiz: number,
+      words: any,
+      correctWords: any,
+      score: number
+    };
     const date = new Date();
-    this.userQuiz.userId = this.user.id;
-    this.userQuiz.idQuiz = this.weekQuiz[0].idQuiz;
-    this.userQuiz.words = this.weekQuiz[0].words;
-    this.userQuiz.date = date.toDateString();
-    this.userQuiz.correctWords = correctWords;
-    this.userQuiz.score = score;
+    uQuiz = {userId: this.user.id, idQuiz: this.weekQ.idQuiz, words: this.thisWeekQuiz,
+      correctWords: correctWords1, score: score1};
+    this.userQuiz = uQuiz;
+    console.log(this.userQuiz);
     await this.examService.createUserQuiz(this.userQuiz).subscribe((response: UserQuizResponse) => {
       console.log(response.data.createUserQuiz);
     });
+    alert(`Tu puntaje fue: ${score1}`);
   }
 
   close() {
     this.closeForm.emit();
   }
-
 }

@@ -30,11 +30,15 @@ export class ExamsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.examLevel.userId = this.user.id;
     this.examLevel.level = 'A1';
-    this.examsLevelSubscription = await this.examsService.examById(this.examLevel).subscribe((response: ExamLevelResponse) => {
+    this.examsLevelSubscription = await this.examsService.allExamLevels().subscribe((response: ExamLevelResponse) => {
       this.examsLevels = response.data.examById;
     });
+    for (let i = 0; i < this.examsLevels.length; i++){
+      if (this.examsLevels[i].userId === this.user.id){
+      }
+    }
     this.userQuiz.userId = this.user.id;
-    this.userQuizSubscription = await this.examsService.userQuizByUserID(this.userQuiz).subscribe((response: UserQuizResponse) => {
+    this.userQuizSubscription = await this.examsService.allUserQuiz().subscribe((response: UserQuizResponse) => {
       this.userQuizes = response.data.userQuizByUserID;
     });
   }

@@ -2,8 +2,8 @@ import { GeneralResponse } from './general-response.model';
 
 export interface Category {
   id?: string;
-  name: string;
-  level: string;
+  name?: string;
+  level?: string;
 }
 
 export interface CategoryData {
@@ -20,12 +20,12 @@ export interface CategoryResponse extends GeneralResponse {
 }
 
 export interface Words {
-  _id: string;
-  name: string;
-  category: string;
-  image: string;
-  linkW: string;
-  meaning: string;
+  _id?: string;
+  name?: string;
+  category?: string;
+  image?: string;
+  linkW?: string;
+  meaning?: string;
 }
 
 export interface WordsData {

@@ -4,6 +4,7 @@ import { ExamsService } from 'src/app/services/exams.service';
 import { Subscription } from 'rxjs';
 import {VocabularyService} from 'src/app/services/vocabulary.service';
 import {WordsResponse, Words} from 'src/app/models/vocabulary.model';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-exams',
@@ -21,8 +22,10 @@ export class WeekQuizComponent implements OnInit {
   };
   word: Words[];
   wordSelect: Words;
+  weekQuizForm;
   showDetail = false;
-  constructor(private examsService: ExamsService, private vocabularyService: VocabularyService) {
+  constructor(private examsService: ExamsService, private vocabularyService: VocabularyService,
+              private fb: FormBuilder) {
     this.weekQuiz = {words: [], idQuiz: 0};
   }
   async ngOnInit(): Promise<void> {
@@ -55,10 +58,14 @@ export class WeekQuizComponent implements OnInit {
       words[i] = this.wordSelect.name;
     }
     console.log(words);
-    this.weekQuiz.words = words;
-    this.weekQuiz.idQuiz = this.randomIntFromInterval(0, 1234);
-    console.log(this.weekQuiz);
-    this.weekQuizSubscription = await this.examsService.createWeekQuiz(this.weekQuiz).subscribe((response: WeekQuizResponse) => {
+    this.weekQuizForm = this.fb.group({
+      idQuiz: [this.randomIntFromInterval(0, 1234), Validators.required],
+      words: [words, Validators.required]
+    });
+    console.log(this.weekQuizForm.value);
+    let quiz: WeekQuiz;
+    quiz = this.weekQuizForm.value;
+    this.weekQuizSubscription = await this.examsService.createWeekQuiz(quiz).subscribe((response: WeekQuizResponse) => {
       console.log(response.data.createWeekQuiz);
     });
   }

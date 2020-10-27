@@ -27,7 +27,7 @@ export class VocabularyService {
       query: gql`
         {
           categoryByName(body:{
-              name= "${category.name}"
+              name: "${category.name}"
            }{
             name
             level
@@ -41,7 +41,7 @@ export class VocabularyService {
       query: gql`
         {
           categoryByLevel(body:{
-              level= "${category.level}"
+              level: "${category.level}"
            }{
             name
             level
@@ -114,8 +114,8 @@ export class VocabularyService {
       query: gql`
         {
           wordsByName(body:{
-              name= "${words.name}"
-           }{
+              name: "${words.name}"
+           }){
             name
             category
             image
@@ -131,8 +131,8 @@ export class VocabularyService {
       query: gql`
         {
           wordsByCategory(body:{
-              category= "${words.category}"
-           }{
+              category: "${words.category}"
+           }){
             name
             category
             image
