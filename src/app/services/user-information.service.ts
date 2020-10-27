@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import {Perfil} from '../models/user-information.model';
+import { User } from '../models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +31,11 @@ export class UserInformationService {
     });
   }
 
-  profileById() {
+  profileById(id:string) {
     return this.apollo.query({
       query: gql`
         {
-          profileById(id:1){
+          profileById(id:${id}){
             nombre
             segundoNombre
             apellido
@@ -48,23 +49,18 @@ export class UserInformationService {
     });
   }
 
-  createProfile(perfil: Perfil) {
+  createProfile(perfil: User) {
     return this.apollo.mutate({
       mutation: gql`
       mutation{
         createProfile(perfil:{
-          nombre:"${perfil.nombre}",
-          segundoNombre:"${perfil.segundoNombre}",
-          apellido:"${perfil.apellido}",
-          segundoApellido:"${perfil.segundoApellido}",
+          nombre:"${perfil.name}",
           email:"${perfil.email}",
-          constrasena:"${perfil.constrasena}",
-          ubicacion:"${perfil.ubicacion}",
-          descripcion:"${perfil.descripcion}"
+          constrasena:"${perfil.password}",
         })
       }
       `
-    });
+    }).toPromise();
   }
 
   updateProfile(id: string,perfil: Perfil) {
@@ -73,9 +69,12 @@ export class UserInformationService {
       mutation{
         updateProfile(id:${id},perfil:{
           nombre:"${perfil.nombre}",
+          segundoNombre:"${perfil.segundoNombre}",
           apellido:"${perfil.apellido}",
+          segundoApellido:"${perfil.segundoApellido}",
           email:"${perfil.email}",
-          descripcion:"${perfil.descripcion}"
+          descripcion:"${perfil.descripcion}",
+          ubicacion:"${perfil.ubicacion}"
         })
       }
       `
@@ -104,7 +103,7 @@ export class UserInformationService {
       mutation: gql`
       mutation{
         updateProfilePassword(id:${id},perfil:{
-          constrasena:"${perfil.constrasena}"
+          constrasena:"${perfil.password}"
         })
       }
       `

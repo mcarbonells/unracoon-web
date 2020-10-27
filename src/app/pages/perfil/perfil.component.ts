@@ -31,7 +31,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.perfilSuscripcion = this.perfilService
-      .profileById()
+      .profileById(this.user.id.toString())
       .subscribe((response: ProfileResponse) => {
         console.log(response);
         this.perfilSeleccted = response.data.profileById;
@@ -41,6 +41,7 @@ export class PerfilComponent implements OnInit {
 
   datosIniciales(perfil: Perfil) {
     this.perfilForm = this.fb.group({
+      //id:[perfil.id,Validators.required],
       nombre: [perfil.nombre, Validators.required],
       segundoNombre: [perfil.segundoNombre, Validators.required],
       apellido: [perfil.apellido, Validators.required],
@@ -53,7 +54,7 @@ export class PerfilComponent implements OnInit {
 
   enviarPerfil() {
     this.perfilService
-      .updateProfile('1', this.perfilForm.value)
+      .updateProfile(this.user.id.toString(), this.perfilForm.value)
       .subscribe((response: ProfileResponse) => {
         console.log(response);
         this.toogleForm();

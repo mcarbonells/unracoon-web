@@ -43,7 +43,7 @@ export class UsuarioService {
         }
       }
       `,
-    });
+    }).toPromise();
   }
 
   loginUser(user: User) {
