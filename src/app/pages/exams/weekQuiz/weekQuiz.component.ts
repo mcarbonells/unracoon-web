@@ -47,6 +47,11 @@ export class WeekQuizComponent implements OnInit {
     this.showDetail = event;
   }
   async createQuiz() {
+    if (this.weekQuices.length > 3){
+      this.weekQuizSubscription = await this.examsService.deleteWeekQuiz().subscribe((response: WeekQuizResponse) => {
+        console.log(response.data.deleteWeekQuiz);
+      });
+    }
     this.weekQuizSubscription = await this.examsService.updateWeekQuiz().subscribe((response: WeekQuizResponse) => {
       console.log(response.data.updateWeekQuiz);
     });

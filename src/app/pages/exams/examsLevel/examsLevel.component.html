@@ -1,3 +1,12 @@
+<div class="container vocabulary-container">
+  <button
+    class="btn btn-outline-primary p-2 m-3"
+    (click)="openExam()"
+    *ngIf="!showQuiz; else wordSection"
+  >
+    Comenzar
+  </button>
+  <ng-template #wordSection>
 <div class= "container" >
   <h2>Exam Level A1</h2>
   <div class= "card">
@@ -10,7 +19,7 @@
       <form
         novalidate
         [formGroup]="examsLevelForm"
-        [ngModel]="words"
+        (ngSubmit)="sendQuiz()"
       >
         <div class="form-group">
           <label class="form-label"> {{words[0]}}</label>
@@ -61,9 +70,11 @@
           <label class="form-label"> {{words[11]}}</label>
           <input type = "text" class= "form-control" placeholder="Word 12" formControlName= "word12"/>
         </div>
-
         <button class="btn btn-success" (click)="close()" type="submit">Enviar</button>
+        <button class="btn btn-success"  routerLink="/learn/weekQuiz" type="submit">Salir</button>
       </form>
     </div>
   </div>
+</div>
+    </ng-template>
 </div>

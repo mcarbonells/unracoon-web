@@ -49,7 +49,7 @@ export class ExamsService {
         mutation {
           createExam(body: {
             userId: ${examLevel.userId}
-            level: ${examLevel.level}
+            level: "${examLevel.level}"
             words: ${words}
             correctWords: ${correctWords}
             pass: ${examLevel.pass}
@@ -96,7 +96,7 @@ export class ExamsService {
         mutation {
           deleteExam(body: {
             userId: ${examLevel.userId}
-            level: ${examLevel.level}
+            level: "${examLevel.level}"
            })
            {
             userId,

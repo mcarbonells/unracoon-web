@@ -1,13 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-// @ts-ignore
 import {UsuarioService} from 'src/app/services/usuario.service';
 import { ExamsService } from 'src/app/services/exams.service';
 import {VocabularyService} from 'src/app/services/vocabulary.service';
 import {ExamLevel, ExamLevelResponse} from 'src/app/models/exams.model';
-// @ts-ignore
 import {Words, WordsResponse} from 'src/app/models/vocabulary.model';
-// @ts-ignore
 import {UserLogin} from 'src/app/models/usuario.model';
 
 @Component({
@@ -18,15 +15,23 @@ import {UserLogin} from 'src/app/models/usuario.model';
 export class ExamsLevelComponent implements OnInit {
   examsLevelForm;
   examLevel: ExamLevel;
+  exam: {
+    userId: number,
+    level: string,
+    words: any,
+    correctWords: any,
+    pass: boolean
+  };
   examLevelB: {
     userId: number,
     level: string
   };
   word: Words[];
-  words = [];
-  wordB: Words;
+  words: any;
+  wordsB: any;
   user: UserLogin;
-  done: boolean;
+  examSelect: ExamLevel;
+  showQuiz = false;
   @Output() closeForm = new EventEmitter<any>();
   constructor(
     private examService: ExamsService,
@@ -57,18 +62,30 @@ export class ExamsLevelComponent implements OnInit {
       this.word = response.data.allWords;
       console.log(response, this.word);
     });
+    this.examLevelB = {userId: this.user.id, level: 'A1'};
+    await this.examService.deleteExam(this.examLevelB).subscribe((response: ExamLevelResponse) => {
+      console.log(response.data.deleteExam);
+    });
+  }
+  async openExam(){
     let n;
     for (let i = 0; i < 12; i++) {
       n = this.randomIntFromInterval(0, this.word.length);
       this.words[i] = this.word[n].name;
     }
-    this.examLevelB.userId = this.user.id;
-    this.examLevelB.level = 'A1';
-    await this.examService.examById(this.examLevelB).subscribe((response: ExamLevelResponse) => {
-      if (response.data.examById.length !== 0){
-        this.done = true;
+    const examWM = [];
+    for (let i = 0; i < 12; i++){
+      // tslint:disable-next-line:prefer-for-of
+      for (let j = 0; j < this.word.length; j++){
+        if (this.word[j].name === this.words[i]){
+          examWM[i] = this.word[j].meaning;
+          break;
+        }
       }
-    });
+    }
+    console.log(examWM);
+    this.wordsB = examWM;
+    this.showQuiz = true;
   }
   async sendQuiz(){
     const words1 = [];
@@ -84,41 +101,26 @@ export class ExamsLevelComponent implements OnInit {
     words1[9] = this.examsLevelForm.value.word10.toLowerCase();
     words1[10] = this.examsLevelForm.value.word11.toLowerCase();
     words1[11] = this.examsLevelForm.value.word12.toLowerCase();
-    let nameWord: Words;
-    const correctWords = [];
+    const correctWords1 = [];
+    let pass1: boolean;
     let n = 0;
-    for (let i = 0; i < 10; i++){
-      this.wordB.name = this.words[i];
-      await this.vocabularyService.getWordByName(this.wordB).subscribe((response: WordsResponse) => {
-        nameWord = response.data.getWordByName[0];
-      });
-      if (nameWord.meaning === words1[i]){
+    for (let i = 0; i < 12; i++){
+      if (this.wordsB[i].toLowerCase() === words1[i]){
         n++;
-        correctWords[i] = words1[i];
+        correctWords1[i] = this.words[i];
       }
     }
-    const date = new Date();
-    this.examLevel.userId = this.user.id;
-    this.examLevel.level = 'A1';
-    this.examLevel.words = this.words;
-    this.examLevel.date = date.toDateString();
-    this.examLevel.correctWords = correctWords;
     if (n >= 6){
-      this.examLevel.pass = true;
+      pass1 = true;
     }
     else{
-      this.examLevel.pass = false;
+      pass1 = false;
     }
-    if (this.done){
-      await this.examService.updateExam(this.examLevel).subscribe((response: ExamLevelResponse) => {
-        console.log(response.data.updateExam);
-      });
-    }
-    else{
-      await this.examService.createExam(this.examLevel).subscribe((response: ExamLevelResponse) => {
+    this.exam = {userId: this.user.id, level: 'A1', words: this.words, correctWords: correctWords1, pass: pass1};
+    this.examLevel = this.exam;
+    await this.examService.createExam(this.examLevel).subscribe((response: ExamLevelResponse) => {
         console.log(response.data.createExam);
-      });
-    }
+    });
   }
   private randomIntFromInterval(min, max): number {
     return Math.floor(Math.random() * (max - min + 1) + min);
