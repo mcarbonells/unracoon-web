@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { UserInformationService } from 'src/app/services/user-information.service';
 
 
 @Component({
@@ -14,29 +15,37 @@ export class RegisterComponent implements OnInit {
   public formSubmitted = false;
 
   public registerForm = this.fb.group({
-    nombre: ['Andres', Validators.required],
+    name: ['Andres', Validators.required],
     email: ['test100@gmai.com', [Validators.required, Validators.email]],
     password: ['123456', Validators.required],
-    password2: ['123456', Validators.required],
+    password_confirmation: ['123456', Validators.required],
     terminos: [true, Validators.required],
   }, {
-    validators: this.passwordsIguales('password', 'password2')
+    validators: this.passwordsIguales('password', 'password_confirmation')
   });
 
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
+    private userInformationService:UserInformationService,
     public router: Router,
   ) {
   }
 
-  crearUsuario() {
+  async crearUsuario(){
     if (this.registerForm.invalid) {
       return;
     } else {
-     this.usuarioService.registerUser(this.registerForm.value).subscribe((response) => {
-         console.log(response);
+      await this.usuarioService.registerUser(this.registerForm.value).then((response) => {
+          console.log(response);
+      }).catch((error)=>{
+          alert(`No se pudo registrar el usuario ${error}`);
+          return;
+      });      
+      await this.userInformationService.createProfile(this.registerForm.value).then((response) => {
+        console.log(response);        
       });
+      this.router.navigate(['/login']);
     }
   }
 
@@ -50,7 +59,7 @@ export class RegisterComponent implements OnInit {
 
   constrasenasNoValidas() {
     const pass1 = this.registerForm.get('password').value;
-    const pass2 = this.registerForm.get('password2').value;
+    const pass2 = this.registerForm.get('password_confirmation').value;
 
     if ((pass1 !== pass2) && this.formSubmitted) {
       return true;
