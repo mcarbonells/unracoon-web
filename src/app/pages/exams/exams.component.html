@@ -1,3 +1,12 @@
+<div class="container vocabulary-container">
+  <button
+    class="btn btn-outline-primary p-2 m-3"
+    (click)="verExamsQuizzes()"
+    *ngIf="!show; else wordSection"
+  >
+    Mostrar Examenes
+  </button>
+  <ng-template #wordSection>
 <div class= "container" >
   <h2>All Exams</h2>
   <div class= "card">
@@ -7,12 +16,18 @@
     <div class = "card-body">
       <ul>
   <li *ngFor = "let examLevel of allUserExams">
-    <h3>{{examLevel.userId}}</h3>
-    <h3>{{examLevel.level}}</h3>
-    <h3>{{examLevel.date}}</h3>
-    <h3>{{examLevel.words}}</h3>
-    <h3>{{examLevel.correctWords}}</h3>
-    <h3>{{examLevel.pass}}</h3>
+    <h4>User Id: </h4>
+    <h6>{{examLevel.userId}}</h6>
+    <h4>Nivel: </h4>
+    <h6>{{examLevel.level}}</h6>
+    <h4>Fecha: </h4>
+    <h6>{{examLevel.date}}</h6>
+    <h4>Palabras: </h4>
+    <h6>{{examLevel.words}}</h6>
+    <h4>Palabras Correctas: </h4>
+    <h6>{{examLevel.correctWords}}</h6>
+    <h4>Aprobado: </h4>
+    <h6>{{examLevel.pass}}</h6>
   </li>
 </ul>
     </div>
@@ -22,14 +37,22 @@
       <div class = "card-body">
 <ul>
   <li *ngFor = "let userQuiz of allUserQuizzes">
-    <h3>{{userQuiz.idQuiz}}</h3>
-    <h3>{{userQuiz.userId}}</h3>
-    <h3>{{userQuiz.date}}</h3>
-    <h3>{{userQuiz.words}}</h3>
-    <h3>{{userQuiz.correctWords}}</h3>
-    <h3>{{userQuiz.score}}</h3>
+    <h4>Id Quiz: </h4>
+    <h6>{{userQuiz.idQuiz}}</h6>
+    <h4>User Id: </h4>
+    <h6>{{userQuiz.userId}}</h6>
+    <h4>Fecha: </h4>
+    <h6>{{userQuiz.date}}</h6>
+    <h4>Palabras: </h4>
+    <h6>{{userQuiz.words}}</h6>
+    <h4>Palabras Correctas: </h4>
+    <h6>{{userQuiz.correctWords}}</h6>
+    <h4>Puntaje: </h4>
+    <h6>{{userQuiz.score}}</h6>
   </li>
 </ul>
     </div>
   </div>
+</div>
+    </ng-template>
 </div>

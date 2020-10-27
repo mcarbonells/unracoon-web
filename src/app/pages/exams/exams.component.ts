@@ -15,6 +15,7 @@ export class ExamsComponent implements OnInit {
   userId: number,
   level: string
 };
+  show = false;
   examsLevels: ExamLevel[];
   allUserExams: ExamLevel[];
   user: UserLogin;
@@ -31,11 +32,13 @@ export class ExamsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.examsLevelSubscription = await this.examsService.allExamLevels().subscribe((response: ExamLevelResponse) => {
-      this.examsLevels = response.data.examById;
+      this.examsLevels = response.data.allExamLevels;
+      console.log(this.examsLevels);
     });
     this.userQuiz.userId = this.user.id;
     this.userQuizSubscription = await this.examsService.allUserQuiz().subscribe((response: UserQuizResponse) => {
-      this.userQuizes = response.data.userQuizByUserID;
+      this.userQuizes = response.data.allUserQuiz;
+      console.log(this.userQuizes);
     });
   }
    verExamsQuizzes(){
@@ -49,11 +52,13 @@ export class ExamsComponent implements OnInit {
     this.allUserExams = examsUser;
     const quizUser = [];
     for (let i = 0; i < this.userQuizes.length; i++){
-       const idUser = this.userQuiz[i];
+       const idUser = this.userQuizes[i];
        if (idUser.userId === this.user.id){
          quizUser[i] = idUser;
        }
     }
     this.allUserQuizzes = quizUser;
+    console.log(this.allUserExams, this.allUserQuizzes);
+    this.show = true;
   }
 }
