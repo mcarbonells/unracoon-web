@@ -6,7 +6,7 @@
     </div>
     <div class = "card-body">
       <ul>
-  <li *ngFor = "let examLevel of examsLevels">
+  <li *ngFor = "let examLevel of allUserExams">
     <h3>{{examLevel.userId}}</h3>
     <h3>{{examLevel.level}}</h3>
     <h3>{{examLevel.date}}</h3>
@@ -21,7 +21,7 @@
       </div>
       <div class = "card-body">
 <ul>
-  <li *ngFor = "let userQuiz of userQuizes">
+  <li *ngFor = "let userQuiz of allUserQuizzes">
     <h3>{{userQuiz.idQuiz}}</h3>
     <h3>{{userQuiz.userId}}</h3>
     <h3>{{userQuiz.date}}</h3>
