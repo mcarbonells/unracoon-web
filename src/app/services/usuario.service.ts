@@ -78,7 +78,6 @@ export class UsuarioService {
 
   getUser(): UserLogin{
     console.log(this.user);
-    
     return this.user;
   }
 

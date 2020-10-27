@@ -15,10 +15,10 @@ export class RegisterComponent implements OnInit {
   public formSubmitted = false;
 
   public registerForm = this.fb.group({
-    name: ['Andres', Validators.required],
-    email: ['test100@gmai.com', [Validators.required, Validators.email]],
-    password: ['123456', Validators.required],
-    password_confirmation: ['123456', Validators.required],
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    password_confirmation: ['', Validators.required],
     terminos: [true, Validators.required],
   }, {
     validators: this.passwordsIguales('password', 'password_confirmation')
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private userInformationService:UserInformationService,
+    private userInformationService: UserInformationService,
     public router: Router,
   ) {
   }
@@ -38,12 +38,12 @@ export class RegisterComponent implements OnInit {
     } else {
       await this.usuarioService.registerUser(this.registerForm.value).then((response) => {
           console.log(response);
-      }).catch((error)=>{
+      }).catch((error) => {
           alert(`No se pudo registrar el usuario ${error}`);
           return;
-      });      
+      });
       await this.userInformationService.createProfile(this.registerForm.value).then((response) => {
-        console.log(response);        
+        console.log(response);
       });
       this.router.navigate(['/login']);
     }
