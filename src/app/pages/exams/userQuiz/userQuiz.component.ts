@@ -10,7 +10,7 @@ import {UserInformationService} from 'src/app/services/user-information.service'
   templateUrl: './userQuiz.component.html',
   styleUrls: ['./userQuiz.component.scss']
 })
-export class UserQUizComponent implements OnInit {
+export class UserQuizComponent implements OnInit {
  userQuizes: UserQuiz[];
  userQuizSubscription: Subscription;
   constructor(private examsService: ExamsService, private userInformationService: UserInformationService) {

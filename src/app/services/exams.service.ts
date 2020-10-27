@@ -192,7 +192,7 @@ export class ExamsService {
     return this.apollo.query({
       query: gql`{
           allUserQuiz {
-            usedId,
+            userId,
             idQuiz,
             words,
             date,
@@ -209,7 +209,7 @@ export class ExamsService {
           userQuizByIdQuiz (body: {
               idQuiz: ${userQuiz.idQuiz}
           }) {
-              usedId,
+              userId,
               idQuiz,
               words,
               date,
@@ -226,7 +226,7 @@ export class ExamsService {
           userQuizByUserID (body: {
               userId: ${userQuiz.userId}
           }) {
-              usedId,
+              userId,
               idQuiz,
               words,
               date,
@@ -271,7 +271,7 @@ export class ExamsService {
             idQuiz: ${userQuiz.idQuiz}
            })
            {
-            usedId,
+            userId,
             idQuiz,
             words,
             date,

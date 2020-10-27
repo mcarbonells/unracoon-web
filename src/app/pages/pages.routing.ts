@@ -15,7 +15,7 @@ import { CategoryComponent } from './vocabulary/category/category.component';
 import { WordsComponent } from './vocabulary/words/words.component';
 import { ExamsComponent } from './exams/exams.component';
 import { WeekQuizComponent } from './exams/weekQuiz/weekQuiz.component';
-import { UserQUizComponent } from './exams/userQuiz/userQuiz.component';
+import { UserQuizComponent } from './exams/userQuiz/userQuiz.component';
 import { UserQuizFormComponent } from './exams/userQuiz/userQuiz-form/userQuiz-form.component';
 import { LevelsComponent } from './levels/levels.component';
 import {ExamsLevelComponent} from './exams/examsLevel/examsLevel.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
             { path: 'exam', component: ExamsComponent, data: { titulo: 'Examenes' } },
           { path: 'exam/examLevel', component: ExamsLevelComponent, data: { titulo: 'Examenes' } },
             { path: 'weekQuiz', component: WeekQuizComponent, data: {titulo: 'WeekQuiz'}},
-            { path: 'userQuizzes', component: UserQUizComponent, data: {titulo: 'UserQuiz'}},
+            { path: 'userQuizzes', component: UserQuizComponent, data: {titulo: 'UserQuiz'}},
             { path: 'weekQuiz/quiz', component: UserQuizFormComponent, data: {titulo: 'UserQuiz'}},
             { path: 'levels', component: LevelsComponent, data: {titulo: 'Niveles'}}
         ]
