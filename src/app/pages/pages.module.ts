@@ -17,9 +17,10 @@ import { VocabularyComponent } from './vocabulary/vocabulary.component';
 import { CategoryComponent } from './vocabulary/category/category.component';
 import { WordsComponent } from './vocabulary/words/words.component';
 import { WeekQuizComponent} from './exams/weekQuiz/weekQuiz.component';
-import { UserQUizComponent} from './exams/userQuiz/userQuiz.component';
+import { UserQuizComponent} from './exams/userQuiz/userQuiz.component';
 import { UserQuizFormComponent} from './exams/userQuiz/userQuiz-form/userQuiz-form.component';
 import { LevelsComponent } from './levels/levels.component';
+import {ExamsLevelComponent} from './exams/examsLevel/examsLevel.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { LevelsComponent } from './levels/levels.component';
     ThreadFormComponent,
     SupportComponent,
     ExamsComponent,
+    ExamsLevelComponent,
     VocabularyComponent,
     WeekQuizComponent,
-    UserQUizComponent,
+    UserQuizComponent,
     UserQuizFormComponent,
     CategoryComponent,
     WordsComponent,

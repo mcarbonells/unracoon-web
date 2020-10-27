@@ -1,1 +1,35 @@
-<p>exams works!</p>
+<div class= "container" >
+  <h2>All Exams</h2>
+  <div class= "card">
+    <div class="card-header">
+      Exams Levels
+    </div>
+    <div class = "card-body">
+      <ul>
+  <li *ngFor = "let examLevel of examsLevels">
+    <h3>{{examLevel.userId}}</h3>
+    <h3>{{examLevel.level}}</h3>
+    <h3>{{examLevel.date}}</h3>
+    <h3>{{examLevel.words}}</h3>
+    <h3>{{examLevel.correctWords}}</h3>
+    <h3>{{examLevel.pass}}</h3>
+  </li>
+</ul>
+    </div>
+      <div class="card-header">
+        Week Quizzes
+      </div>
+      <div class = "card-body">
+<ul>
+  <li *ngFor = "let userQuiz of userQuizes">
+    <h3>{{userQuiz.idQuiz}}</h3>
+    <h3>{{userQuiz.userId}}</h3>
+    <h3>{{userQuiz.date}}</h3>
+    <h3>{{userQuiz.words}}</h3>
+    <h3>{{userQuiz.correctWords}}</h3>
+    <h3>{{userQuiz.score}}</h3>
+  </li>
+</ul>
+    </div>
+  </div>
+</div>

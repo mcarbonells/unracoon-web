@@ -4,10 +4,10 @@ export interface ExamLevel {
   _id?: string;
   userId: number;
   level: string;
-  words: any;
+  words?: any;
   date?: string;
-  correctWords: any;
-  pass: boolean;
+  correctWords?: any;
+  pass?: boolean;
 }
 
 export interface ExamLevelData {
@@ -43,12 +43,12 @@ export interface WeekQuizResponse extends GeneralResponse {
 
 export interface UserQuiz {
   _id?: string;
-  userId: number;
-  idQuiz: number;
-  words: any;
+  userId?: number;
+  idQuiz?: number;
+  words?: any;
   date?: string;
-  correctWords: any;
-  score: number;
+  correctWords?: any;
+  score?: number;
 }
 
 export interface UserQuizData {
