@@ -6,7 +6,13 @@
   height: 100%;
 }
 
-.weekQuiz-content {
+.card-body {
+  overflow: auto;
+  padding: 1.25rem;
+  height: 400px;
+}
+
+.weekQUiz-content {
   width: 95%;
   border: 1px solid black;
   height: 75vh;
@@ -20,7 +26,7 @@
   border-right: 1px solid white;
 }
 
-.weekQuiz-content-title {
+.weekQUiz-content-title {
   background-color: #636E72;
   color: white;
   padding: 4px;
@@ -31,7 +37,7 @@
   position: relative;
 }
 
-.weekQuiz-content-list {
+.weekQUiz-content-list {
   background-color: #DFE6E9;
   height: 90%;
   overflow: auto;
