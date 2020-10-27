@@ -30,7 +30,6 @@ export class ExamsLevelComponent implements OnInit {
   words: any;
   wordsB: any;
   user: UserLogin;
-  examSelect: ExamLevel;
   showQuiz = false;
   @Output() closeForm = new EventEmitter<any>();
   constructor(
@@ -69,10 +68,13 @@ export class ExamsLevelComponent implements OnInit {
   }
   async openExam(){
     let n;
+    const selectWords = [];
     for (let i = 0; i < 12; i++) {
-      n = this.randomIntFromInterval(0, this.word.length);
-      this.words[i] = this.word[n].name;
+      n = this.randomIntFromInterval(0, this.word.length - 1);
+      const examSelected = this.word[i];
+      selectWords[i] = examSelected.name;
     }
+    this.words = selectWords;
     const examWM = [];
     for (let i = 0; i < 12; i++){
       // tslint:disable-next-line:prefer-for-of
@@ -111,10 +113,12 @@ export class ExamsLevelComponent implements OnInit {
       }
     }
     if (n >= 6){
+      alert(`Pasaste el Examen`);
       pass1 = true;
     }
     else{
       pass1 = false;
+      alert(`Perdiste el Examen`);
     }
     this.exam = {userId: this.user.id, level: 'A1', words: this.words, correctWords: correctWords1, pass: pass1};
     this.examLevel = this.exam;
