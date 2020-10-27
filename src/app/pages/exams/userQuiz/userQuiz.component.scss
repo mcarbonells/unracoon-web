@@ -1,0 +1,65 @@
+.weekQuiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+
+.weekQuiz-content {
+  width: 95%;
+  border: 1px solid black;
+  height: 75vh;
+  min-height: 300px;
+  min-width: 500px;
+  box-shadow: 2px 0 7px #999;
+  overflow: hidden;
+}
+
+.weekQuiz-left-panel {
+  border-right: 1px solid white;
+}
+
+.weekQuiz-content-title {
+  background-color: #636E72;
+  color: white;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  position: relative;
+}
+
+.weekQuiz-content-list {
+  background-color: #DFE6E9;
+  height: 90%;
+  overflow: auto;
+}
+
+.weekQuiz-content-list::-webkit-scrollbar {
+  display: none;
+}
+
+.list-weekQuiz{
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.list-weekQuiz:hover{
+  background-color: #B2BEC3;
+  cursor: pointer;
+}
+
+.button-add {
+  color: blue;
+  position: absolute;
+  right: 10px;
+  border: 1px solid white;
+}
+
+.weekQuiz-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

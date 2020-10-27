@@ -4,7 +4,7 @@ import { ExamsService } from 'src/app/services/exams.service';
 import { Subscription } from 'rxjs';
 import {VocabularyService} from 'src/app/services/vocabulary.service';
 import {WordsResponse, Words} from 'src/app/models/vocabulary.model';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-exams',
@@ -16,17 +16,24 @@ export class WeekQuizComponent implements OnInit {
   weekQuizSelected: WeekQuiz;
   weekQuizSubscription: Subscription;
   vocabularioSubscription: Subscription;
-  weekQuiz;
+  weekQuiz: {
+    words: any[],
+    idQuiz: number
+  };
   word: Words[];
-  faPlus = faPlus;
+  wordSelect: Words;
+  weekQuizForm;
   showDetail = false;
-  constructor(private examsService: ExamsService, private vocabularyService: VocabularyService) {
+  constructor(private examsService: ExamsService, private vocabularyService: VocabularyService,
+              private fb: FormBuilder) {
+    this.weekQuiz = {words: [], idQuiz: 0};
   }
-  ngOnInit(): void {
-    this.weekQuizSubscription = this.examsService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
+  async ngOnInit(): Promise<void> {
+    this.weekQuizSubscription = await this.examsService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
       this.weekQuices = response.data.allWeekQuiz;
+      console.log(response.data.allWeekQuiz);
     });
-    this.vocabularioSubscription = this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
+    this.vocabularioSubscription = await this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
       this.word = response.data.allWords;
       console.log(response, this.word);
     });
@@ -39,22 +46,31 @@ export class WeekQuizComponent implements OnInit {
   hideDetail(event: boolean) {
     this.showDetail = event;
   }
-  createQuiz() {
-    const words = Array;
+  async createQuiz() {
+    if (this.weekQuices.length > 3){
+      this.weekQuizSubscription = await this.examsService.deleteWeekQuiz().subscribe((response: WeekQuizResponse) => {
+        console.log(response.data.deleteWeekQuiz);
+      });
+    }
+    this.weekQuizSubscription = await this.examsService.updateWeekQuiz().subscribe((response: WeekQuizResponse) => {
+      console.log(response.data.updateWeekQuiz);
+    });
+    const words = [];
     let n;
     for (let i = 0; i < 10; i++) {
-      n = this.randomIntFromInterval(0, this.word.length);
-      words[i] = this.word[n].name;
+      n = this.randomIntFromInterval(0, this.word.length - 1);
+      this.wordSelect = this.word[n];
+      words[i] = this.wordSelect.name;
     }
-    this.weekQuiz = {
-      words: [''],
-      idQuiz: 0
-    };
-    this.weekQuiz.words = words;
-    this.weekQuiz.idQuiz = this.randomIntFromInterval(0, 1234);
-    console.log(this.weekQuiz);
-    console.log(this.weekQuiz);
-    this.weekQuizSubscription = this.examsService.createWeekQuiz(this.weekQuiz).subscribe((response: WeekQuizResponse) => {
+    console.log(words);
+    this.weekQuizForm = this.fb.group({
+      idQuiz: [this.randomIntFromInterval(0, 1234), Validators.required],
+      words: [words, Validators.required]
+    });
+    console.log(this.weekQuizForm.value);
+    let quiz: WeekQuiz;
+    quiz = this.weekQuizForm.value;
+    this.weekQuizSubscription = await this.examsService.createWeekQuiz(quiz).subscribe((response: WeekQuizResponse) => {
       console.log(response.data.createWeekQuiz);
     });
   }

@@ -14,7 +14,7 @@ export class VocabularyService {
     return this.apollo.query({
       query: gql`
         {
-          allCategory {
+          allCategories {
             name
             level
           }
@@ -22,9 +22,35 @@ export class VocabularyService {
       `,
     });
   }
-
+  getCategoryByName(category: Category){
+    return this.apollo.query({
+      query: gql`
+        {
+          categoryByName(body:{
+              name: "${category.name}"
+           }{
+            name
+            level
+          }
+        }
+      `,
+    });
+  }
+  getCategoryByLevel(category: Category){
+    return this.apollo.query({
+      query: gql`
+        {
+          categoryByLevel(body:{
+              level: "${category.level}"
+           }{
+            name
+            level
+          }
+        }
+      `,
+    });
+  }
   addCategory(category: Category) {
-    console.log(category)
     return this.apollo.mutate({
       mutation: gql`
       mutation {
@@ -39,7 +65,35 @@ export class VocabularyService {
       `
     });
   }
-
+  updateCategory(category: Category) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation {
+        updateCategory(body: {
+          name: "${category.name}",
+          level: "${category.level}",
+      }) {
+        name
+        level
+        }
+      }
+      `
+    });
+  }
+  deleteCategory(category: Category) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation {
+        deleteCategory(body: {
+          name: "${category.name}"
+      }) {
+        name
+        level
+        }
+      }
+      `
+    });
+  }
   getAllWords() {
     return this.apollo.query({
       query: gql`
@@ -55,7 +109,40 @@ export class VocabularyService {
       `,
     });
   }
-
+  getWordByName(words: Words){
+    return this.apollo.query({
+      query: gql`
+        {
+          wordsByName(body:{
+              name: "${words.name}"
+           }){
+            name
+            category
+            image
+            linkW
+            meaning
+          }
+        }
+      `,
+    });
+  }
+  getWordByCategory(words: Words){
+    return this.apollo.query({
+      query: gql`
+        {
+          wordsByCategory(body:{
+              category: "${words.category}"
+           }){
+            name
+            category
+            image
+            linkW
+            meaning
+          }
+        }
+      `,
+    });
+  }
   addWord(words: Words) {
     return this.apollo.mutate({
       mutation: gql`
@@ -69,6 +156,46 @@ export class VocabularyService {
       }) {
           name
           category
+          image
+          linkW
+          meaning
+        }
+      }
+      `
+    });
+  }
+  updateWord(words: Words) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation {
+        updateWord(body: {
+          name: "${words.name}",
+          category: "${words.category}",
+          image: "${words.image}",
+          linkW: "${words.linkW}"
+          meaning: "${words.meaning}"
+      }) {
+          name
+          category
+          image
+          linkW
+          meaning
+        }
+      }
+      `
+    });
+  }
+  deleteWord(words: Words) {
+    return this.apollo.mutate({
+      mutation: gql`
+      mutation {
+        deleteteWord(body: {
+          name: "${words.name}"
+      }) {
+          name
+          category
+          image
+          linkW
           meaning
         }
       }

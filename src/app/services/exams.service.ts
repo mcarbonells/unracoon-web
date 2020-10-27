@@ -27,8 +27,8 @@ export class ExamsService {
     return this.apollo.query({
       query: gql`{
           examById (body: {
-              userId: "${examLevel.userId}"
-              level: "${examLevel.level}"
+              userId: ${examLevel.userId}
+              level: ${examLevel.level}
           }) {
               userId,
               level,
@@ -42,15 +42,17 @@ export class ExamsService {
     });
   }
   createExam(examLevel: ExamLevel){
+    const words = JSON.stringify(examLevel.words);
+    const correctWords = JSON.stringify(examLevel.correctWords);
     return this.apollo.mutate({
       mutation: gql`
         mutation {
           createExam(body: {
-            userId: "${examLevel.userId}"
+            userId: ${examLevel.userId}
             level: "${examLevel.level}"
-            words: "${examLevel.words}"
-            correctWords: "${examLevel.correctWords}"
-            pass: "${examLevel.pass}"
+            words: ${words}
+            correctWords: ${correctWords}
+            pass: ${examLevel.pass}
            })
            {
             userId,
@@ -64,16 +66,18 @@ export class ExamsService {
     });
   }
   updateExam(examLevel: ExamLevel){
+    const words = JSON.stringify(examLevel.words);
+    const correctWords = JSON.stringify(examLevel.correctWords);
     return this.apollo.mutate({
       mutation: gql`
         mutation {
           updateExam(body: {
-            userId: "${examLevel.userId}"
-            level: "${examLevel.level}"
-            words: "${examLevel.words}"
-            date: "${examLevel.date}"
-            correctWords: "${examLevel.correctWords}"
-            pass: "${examLevel.pass}"
+            userId: ${examLevel.userId}
+            level: ${examLevel.level}
+            words: ${examLevel.words}
+            date: ${examLevel.date}
+            correctWords: "${examLevel.correctWords}
+            pass: "${examLevel.pass}
            })
            {
             userId,
@@ -91,7 +95,7 @@ export class ExamsService {
       mutation: gql`
         mutation {
           deleteExam(body: {
-            userId: "${examLevel.userId}"
+            userId: ${examLevel.userId}
             level: "${examLevel.level}"
            })
            {
@@ -121,7 +125,9 @@ export class ExamsService {
   weekQuizById(){
     return this.apollo.query({
       query: gql`{
-          weekQuizById() {
+          weekQuizById(body:{
+            active: true
+          }) {
               idQuiz,
               words,
               date,
@@ -132,13 +138,14 @@ export class ExamsService {
     });
   }
   createWeekQuiz(weekQuiz: WeekQuiz){
+    const words = JSON.stringify(weekQuiz.words);
+    console.log(words, weekQuiz.words);
     return this.apollo.mutate({
       mutation: gql`
         mutation {
           createWeekQuiz(body: {
-            idQuiz: "${weekQuiz.idQuiz}"
-            words: "${weekQuiz.words}"
-            active: "${weekQuiz.active}"
+            idQuiz: ${weekQuiz.idQuiz}
+            words: ${words}
            })
            {
             idQuiz,
@@ -153,7 +160,9 @@ export class ExamsService {
     return this.apollo.mutate({
       mutation: gql`
         mutation {
-          updateWeekQuiz()
+          updateWeekQuiz(body:{
+            active: true
+          })
            {
             idQuiz,
             words,
@@ -167,7 +176,9 @@ export class ExamsService {
     return this.apollo.mutate({
       mutation: gql`
         mutation {
-          deleteWeekQuiz()
+          deleteWeekQuiz(body:{
+            active: false
+          })
            {
             idQuiz,
             words,
@@ -181,7 +192,7 @@ export class ExamsService {
     return this.apollo.query({
       query: gql`{
           allUserQuiz {
-            usedId,
+            userId,
             idQuiz,
             words,
             date,
@@ -196,9 +207,9 @@ export class ExamsService {
     return this.apollo.query({
       query: gql`{
           userQuizByIdQuiz (body: {
-              idQuiz: "${userQuiz.idQuiz}"
+              idQuiz: ${userQuiz.idQuiz}
           }) {
-              usedId,
+              userId,
               idQuiz,
               words,
               date,
@@ -213,9 +224,9 @@ export class ExamsService {
     return this.apollo.query({
       query: gql`{
           userQuizByUserID (body: {
-              userId: "${userQuiz.userId}"
+              userId: ${userQuiz.userId}
           }) {
-              usedId,
+              userId,
               idQuiz,
               words,
               date,
@@ -227,18 +238,21 @@ export class ExamsService {
     });
   }
   createUserQuiz(userQuiz: UserQuiz){
+    const words = JSON.stringify(userQuiz.words);
+    const correctWords = JSON.stringify(userQuiz.correctWords);
+    console.log(words, correctWords);
     return this.apollo.mutate({
       mutation: gql`
         mutation {
           createUserQuiz(body: {
-            userId: "${userQuiz.userId}"
-            idQuiz: "${userQuiz.idQuiz}"
-            words: "${userQuiz.words}"
-            correctWords: "${userQuiz.correctWords}"
-            scare: "${userQuiz.score}"
+            userId: ${userQuiz.userId}
+            idQuiz: ${userQuiz.idQuiz}
+            words: ${words}
+            correctWords: ${correctWords}
+            score: ${userQuiz.score}
            })
            {
-            usedId,
+            userId,
             idQuiz,
             words,
             date,
@@ -253,11 +267,11 @@ export class ExamsService {
       mutation: gql`
         mutation {
           deleteUserQuiz(body: {
-            userId: "${userQuiz.userId}"
-            idQuiz: "${userQuiz.idQuiz}"
+            userId: ${userQuiz.userId}
+            idQuiz: ${userQuiz.idQuiz}
            })
            {
-            usedId,
+            userId,
             idQuiz,
             words,
             date,
