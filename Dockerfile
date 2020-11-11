@@ -1,19 +1,22 @@
-# base image
-FROM node:12.11.1
-
-# set working directory
+# Stage 0, for downloading project’s npm dependencies, building and compiling the app.
+# Angular 6 requires node:8.9+
+FROM node:10 as node
 WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY package.json /app/package.json
+COPY package.json /app/
 RUN npm install
-RUN npm install -g @angular/cli@9.1.11
+COPY ./ /app/
+RUN npm run build
+# Stage 1, for copying the compiled app from the previous step and making it ready for production with Nginx
+FROM nginx:alpine
+COPY --from=node /app/dist/unracoon-web /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# add app
-COPY . /app
 
-# start app
-CMD ng serve --host 0.0.0.0
+RUN apk update
+RUN apk upgrade
+RUN apk add bash
+RUN apk add openssl
+RUN /bin/bash -c "openssl req -x509 -out etc/ssl/localhost.crt -keyout etc/ssl/localhost.key \
+      -newkey rsa:2048 -nodes -sha256 \
+      -subj '/CN=localhost' -extensions EXT -config <( \
+       printf '[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth')"
