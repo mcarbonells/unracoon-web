@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UsuarioService {
 
-  public user: UserLogin;
+  public token: string;
   constructor(
     private apollo: Apollo,
     private router: Router
@@ -50,35 +50,58 @@ export class UsuarioService {
     return this.apollo.mutate({
       mutation: gql`
       mutation {
-        logInUser(user: {
+        logInUser(session: {
           email: "${user.email}",
           password: "${user.password}",
-        }) { data {
-          id, name, email
-        }
+        }){
+          token, client, uid, error
         }
       }
       `,
     }).toPromise().then((res: UserResponse) => {
-      this.user = res.data.logInUser.data;
-      localStorage.setItem('user', JSON.stringify(this.user));
+      this.token = res.data.logInUser.token;
+      if (res.data.logInUser.error) {
+        alert('Datos invalidos');
+      } else {
+        localStorage.setItem('token', JSON.stringify(this.token));
+        localStorage.setItem('client', JSON.stringify(res.data.logInUser.client));
+        localStorage.setItem('uid', JSON.stringify(res.data.logInUser.uid));
+        this.router.navigate(['/learn']);
+      }
     });
   }
 
   validarUser() {
-    this.user = JSON.parse(localStorage.getItem('user')) || '';
-    if ( this.user ) {
-      return true;
-    } else {
-      this.router.navigateByUrl('/login');
-      return false;
-    }
-
+    const token = JSON.parse(localStorage.getItem('token')) || null;
+    const client = JSON.parse(localStorage.getItem('client')) || null;
+    const uid = JSON.parse(localStorage.getItem('uid')) || null;
+    console.log(token, client, uid);
+    return this.apollo.mutate({
+      mutation: gql`
+      query {
+        validateToken(headers: {
+          token: "${token}",
+          client: "${client}",
+          uid: "${uid}",
+        }){
+          token, error
+        }
+      }
+      `,
+    }).toPromise().then((res: any) => {
+      this.token = res.data.validateToken.token;
+      const error = res.data.validateToken.error;
+      if ( this.token && !error) {
+        return true;
+      } else {
+        this.router.navigateByUrl('/login');
+        return false;
+      }
+    });
   }
 
   getUser(): UserLogin{
-    console.log(this.user);
-    return this.user;
+    return {id: 0, name: 'Andres Velandia', email: 'anfvelandiaer@unal.edu.co'};
   }
 
 

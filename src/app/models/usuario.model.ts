@@ -16,7 +16,11 @@ export interface User {
 }
 
 export interface Data {
+  token: string;
+  client: string;
+  uid: string;
   data: User;
+  error: string;
 }
 
 export interface UserLogin {
