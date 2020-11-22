@@ -6,6 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { FirebaseService } from './services/firebase.service';
+import { environment } from '../environments/environment';
+import { AsyncPipe } from '../../node_modules/@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,9 +25,14 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     AuthModule,
     PagesModule,
-    GraphQLModule
+    GraphQLModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [FirebaseService, AsyncPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
