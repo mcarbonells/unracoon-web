@@ -34,7 +34,7 @@ export class UserQuizFormComponent implements OnInit {
     this.user = this.usuarioService.getUser();
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     this.userQuizForm = this.fb.group({
       word1: ['', Validators.required],
       word2: ['', Validators.required],
@@ -47,14 +47,19 @@ export class UserQuizFormComponent implements OnInit {
       word9: ['', Validators.required],
       word10: ['', Validators.required],
     });
-    this.userQuizSubscription = await this.examService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
+    this.userQuizSubscription = this.examService.allWeekQuiz().subscribe((response: WeekQuizResponse) => {
+      console.log(response.data.allWeekQuiz );
       this.weekQuiz = response.data.allWeekQuiz;
     });
-    await this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
+    this.vocabularyService.getAllWords().subscribe((response: WordsResponse) => {
       this.words = response.data.allWords;
     });
   }
-  async optenerQuiz(){
+
+  ngOnDestroy(): void {
+    this.userQuizSubscription.unsubscribe();
+  }
+  async obtenerQuiz(){
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.weekQuiz.length; i++){
       const quizSelected = this.weekQuiz[i];
@@ -73,7 +78,6 @@ export class UserQuizFormComponent implements OnInit {
         }
       }
     }
-    console.log(quizWM);
     this.wordsB = quizWM;
     this.showQuiz = true;
   }

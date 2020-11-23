@@ -111,7 +111,7 @@ export class ExamsService {
   }
   allWeekQuiz(){
     return this.apollo.query({
-      query: gql`{
+      query: gql`query {
           allWeekQuiz {
             idQuiz,
             words,
@@ -146,6 +146,7 @@ export class ExamsService {
           createWeekQuiz(body: {
             idQuiz: ${weekQuiz.idQuiz}
             words: ${words}
+            active: true
            })
            {
             idQuiz,

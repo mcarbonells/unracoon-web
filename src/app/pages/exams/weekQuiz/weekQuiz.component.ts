@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import {VocabularyService} from 'src/app/services/vocabulary.service';
 import {WordsResponse, Words} from 'src/app/models/vocabulary.model';
 import {FormBuilder, Validators} from '@angular/forms';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-exams',
@@ -25,7 +26,7 @@ export class WeekQuizComponent implements OnInit {
   weekQuizForm;
   showDetail = false;
   constructor(private examsService: ExamsService, private vocabularyService: VocabularyService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder, private firebaseService: FirebaseService) {
     this.weekQuiz = {words: [], idQuiz: 0};
   }
   async ngOnInit(): Promise<void> {
@@ -47,7 +48,7 @@ export class WeekQuizComponent implements OnInit {
     this.showDetail = event;
   }
   async createQuiz() {
-    if (this.weekQuices.length > 3){
+    if (this.weekQuices.length >= 3){
       this.weekQuizSubscription = await this.examsService.deleteWeekQuiz().subscribe((response: WeekQuizResponse) => {
         console.log(response.data.deleteWeekQuiz);
       });
@@ -72,6 +73,7 @@ export class WeekQuizComponent implements OnInit {
     quiz = this.weekQuizForm.value;
     this.weekQuizSubscription = await this.examsService.createWeekQuiz(quiz).subscribe((response: WeekQuizResponse) => {
       console.log(response.data.createWeekQuiz);
+      this.firebaseService.pushNotification();
     });
   }
   private randomIntFromInterval(min, max): number {

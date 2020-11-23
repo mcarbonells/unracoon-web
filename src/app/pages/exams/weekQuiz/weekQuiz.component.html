@@ -4,8 +4,7 @@
   </div>
   <div class="row weekQUiz-content mb-3">
     <div class="col-lg-4 p-0 weekQUiz-left-panel">
-      <div class="weekQUiz-content-title px-4">
-      </div>
+      <div class="weekQUiz-content-title px-4"></div>
       <div class="weekQUiz-content-list">
         <ul class="list-group list-group-flush">
           <li
@@ -13,28 +12,39 @@
             *ngFor="let weekQuiz of weekQuices"
             (click)="openWeekQuiz(weekQuiz)"
           >
-            <h4>Id Quiz: </h4>
+            <h4>Id Quiz:</h4>
             <h6>{{ weekQuiz.idQuiz }}</h6>
-            <h4>Fecha Quiz: </h4>
+            <h4>Fecha Quiz:</h4>
             <h6>{{ weekQuiz.date }}</h6>
-            <h4>Quiz Activo: </h4>
+            <h4>Quiz Activo:</h4>
             <h6>{{ weekQuiz.active }}</h6>
           </li>
         </ul>
       </div>
     </div>
     <div class="col-lg-8 p-0">
+      <button
+        class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+        type="submit"
+        (click)="createQuiz()"
+        routerLink="/learn/weekQuiz"
+      >
+        Nuevo Quiz
+      </button>
+      <button
+        class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+        routerLink="/learn/weekQuiz/quiz"
+        role="button"
+      >
+        Realizar Week Quiz
+      </button>
+      <button
+        class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
+        routerLink="/learn/userQuizzes"
+        role="button"
+      >
+        All Users Quiz
+      </button>
     </div>
   </div>
-  <button
-    class="btn btn-info btn-lg btn-block text-uppercase btn-rounded"
-    type="submit"
-    (click)="createQuiz()"
-    routerLink="/learn/weekQuiz"
-  >
-    Nuevo Quiz
-  </button>
-  <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" routerLink="/learn/weekQuiz/quiz" role="button">Realizar Week Quiz</button>
-  <button class="btn btn-info btn-lg btn-block text-uppercase btn-rounded" routerLink="/learn/userQuizzes" role="button">All Users Quiz</button>
 </div>
-

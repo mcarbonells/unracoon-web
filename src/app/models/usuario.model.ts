@@ -30,7 +30,7 @@ export interface UserLogin {
 }
 
 export interface UserData {
-  logInUser: Data;
+  logInUser_1: Data;
   registerUser: UserLogin;
 }
 export interface UserResponse extends GeneralResponse {

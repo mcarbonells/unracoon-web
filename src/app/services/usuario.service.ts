@@ -50,7 +50,7 @@ export class UsuarioService {
     return this.apollo.mutate({
       mutation: gql`
       mutation {
-        logInUser(session: {
+        logInUser_1(session: {
           email: "${user.email}",
           password: "${user.password}",
         }){
@@ -59,13 +59,14 @@ export class UsuarioService {
       }
       `,
     }).toPromise().then((res: UserResponse) => {
-      this.token = res.data.logInUser.token;
-      if (res.data.logInUser.error) {
+      console.log(res);
+      this.token = res.data.logInUser_1.token;
+      if (res.data.logInUser_1.error) {
         alert('Datos invalidos');
       } else {
         localStorage.setItem('token', JSON.stringify(this.token));
-        localStorage.setItem('client', JSON.stringify(res.data.logInUser.client));
-        localStorage.setItem('uid', JSON.stringify(res.data.logInUser.uid));
+        localStorage.setItem('client', JSON.stringify(res.data.logInUser_1.client));
+        localStorage.setItem('uid', JSON.stringify(res.data.logInUser_1.uid));
         this.router.navigate(['/learn']);
       }
     });

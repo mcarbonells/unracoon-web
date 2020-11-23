@@ -69,3 +69,12 @@
   align-items: center;
   justify-content: center;
 }
+
+.list-group-flush{ 
+  background-color: transparent;
+}
+
+.list-group-flush>.list-group-item {
+  border-width: 0 0 1px;
+  background: transparent;
+}
