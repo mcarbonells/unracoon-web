@@ -29,10 +29,25 @@ export interface UserLogin {
   email: string;
 }
 
+export interface UserSoap {
+  email: string;
+  displayName: string;
+  role: string;
+  emailVerified: boolean;
+  photoURL: string;
+}
+
 export interface UserData {
   logInUser_1: Data;
   registerUser: UserLogin;
+  getUser1a: UserSoap;
 }
+
 export interface UserResponse extends GeneralResponse {
+  data: UserData;
+}
+
+
+export interface UserSoapResponse extends GeneralResponse {
   data: UserData;
 }
