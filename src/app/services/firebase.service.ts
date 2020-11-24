@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class FirebaseService {
   currentMessage = new BehaviorSubject(null);
   tokens = [
-    'eqYRSwZN5exMVeVF26aRlw:APA91bEXL3ZBv3CJ8UZ8m6I68ZjiPQHLo22A-Z3gpUtzj5HLJg4O6AXfXNJ9ADUr9mXwgP1aHG99_pAVQLfF_dCmN-I9Pu8WwvMKJArsPb2YRQspzpbYfDluaiAIB9qiu-gZhP1a67X8', 'c_QKGWyd_wTyq6xbYIh9rl:APA91bFFtqzLT7gq1wRMwZDW3Xi2Lk4BTKBsapR6PPR-DI2VWbm-GbV2VPvbfipIFqs7bnXnsRdIq42QZ8LkOswZTxod4NmDe64ius7VV2_Dw3RRSV2DBlAhFOwMr1ZsfJeg2K7_R_Sk' ];
+    'eqYRSwZN5exMVeVF26aRlw:APA91bF-KhguHCZB1FlGuTG8gLcQO1_gHWhzudqfsOYl-vgkedRsq6Utp4O7jMbICVCOIHHahPiLgeE7146nQBW_ncLWw05yqorw-lencvnWrkgG12vsOgG4JsGri58bn2Fn0lo473su', 'c_QKGWyd_wTyq6xbYIh9rl:APA91bFFtqzLT7gq1wRMwZDW3Xi2Lk4BTKBsapR6PPR-DI2VWbm-GbV2VPvbfipIFqs7bnXnsRdIq42QZ8LkOswZTxod4NmDe64ius7VV2_Dw3RRSV2DBlAhFOwMr1ZsfJeg2K7_R_Sk' ];
 
   constructor(
     private angularFireMessaging: AngularFireMessaging,
