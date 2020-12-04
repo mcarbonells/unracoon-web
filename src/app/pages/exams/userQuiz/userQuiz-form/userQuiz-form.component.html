@@ -1,7 +1,7 @@
 <div class="container vocabulary-container">
   <button
     class="btn btn-outline-primary p-2 m-3"
-    (click)="optenerQuiz()"
+    (click)="obtenerQuiz()"
     *ngIf="!showQuiz; else wordSection"
   >
     Comenzar
@@ -65,8 +65,8 @@
           <input type = "text" class= "form-control" placeholder="Word 10" formControlName= "word10"/>
         </div>
         </ul>
-        <button class="btn btn-success"  (click)="close()" type="submit">Enviar</button>
-        <button class="btn btn-success"  routerLink="/learn/weekQuiz" type="submit">Salir</button>
+        <button class="btn btn-success m-3"  (click)="close()" type="submit">Enviar</button>
+        <button class="btn btn-success m-3"  routerLink="/learn/weekQuiz" type="submit">Salir</button>
       </form>
     </div>
   </div>

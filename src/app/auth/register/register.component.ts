@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { UserInformationService } from 'src/app/services/user-information.service';
+import Swal from 'sweetalert2';
+import { UserSoap, UserSoapResponse } from 'src/app/models/usuario.model';
 
 
 @Component({
@@ -12,31 +15,40 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class RegisterComponent implements OnInit {
 
   public formSubmitted = false;
+  soapUser: UserSoap;
 
   public registerForm = this.fb.group({
-    nombre: ['Andres', Validators.required],
-    email: ['test100@gmai.com', [Validators.required, Validators.email]],
-    password: ['123456', Validators.required],
-    password2: ['123456', Validators.required],
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required],
+    password_confirmation: ['', Validators.required],
     terminos: [true, Validators.required],
   }, {
-    validators: this.passwordsIguales('password', 'password2')
+    validators: this.passwordsIguales('password', 'password_confirmation')
   });
 
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
+    private userInformationService: UserInformationService,
     public router: Router,
   ) {
   }
 
-  crearUsuario() {
+  async crearUsuario(){
     if (this.registerForm.invalid) {
       return;
     } else {
-     this.usuarioService.registerUser(this.registerForm.value).subscribe((response) => {
-         console.log(response);
+      await this.usuarioService.registerUser(this.registerForm.value).then((response) => {
+          console.log(response);
+      }).catch((error) => {
+          alert(`No se pudo registrar el usuario ${error}`);
+          return;
       });
+      // await this.userInformationService.createProfile(this.registerForm.value).then((response) => {
+      //   console.log(response);
+      // });
+      this.router.navigate(['/login']);
     }
   }
 
@@ -50,7 +62,7 @@ export class RegisterComponent implements OnInit {
 
   constrasenasNoValidas() {
     const pass1 = this.registerForm.get('password').value;
-    const pass2 = this.registerForm.get('password2').value;
+    const pass2 = this.registerForm.get('password_confirmation').value;
 
     if ((pass1 !== pass2) && this.formSubmitted) {
       return true;
@@ -76,6 +88,35 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getSoapInfo() {
+    if (this.registerForm.get('email').valid){
+      this.usuarioService.getUserSoap(this.registerForm.get('email').value).then((res: UserSoapResponse) => {
+        const error = res.data.getUser1a.displayName ? false : true;
+        if ( error ) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Email Invalido',
+            text: 'Este Email no se encuentra registrado en la base de datos',
+          });
+        } else {
+          this.soapUser = res.data.getUser1a;
+          this.registerForm.get('name').setValue(this.soapUser.displayName);
+          Swal.fire({
+            icon: 'success',
+            title: 'Operación Exitosa',
+            text: `Email: ${this.soapUser.email}, Nombre: ${this.soapUser.displayName}`,
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email Necesario',
+        text: 'Para poder consultar el usuario es necesario ingresar un email',
+      });
+    }
   }
 
 }

@@ -7,7 +7,7 @@ export interface Perfil {
   apellido?: string;
   segundoApellido?: string;
   email?: string;
-  constrasena?: string;
+  password?: string;
   estado?: boolean;
   ubicacion?: string;
   descripcion?: string;
