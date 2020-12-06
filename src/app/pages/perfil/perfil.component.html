@@ -6,7 +6,7 @@
     <div class="col">
       <div *ngIf="!showEditForm; else editForm">
         <div class="card">
-          <h5 class="card-header">{{ perfilSeleccted.nombre }}'s Profile</h5>
+          <h5 class="card-header">{{ perfilSeleccted?.nombre }}'s Profile</h5>
           <div class="card-body">
             <form>
               <div class="form-group row">
@@ -15,7 +15,7 @@
                 >
                 <div class="col-sm-4">
                   <label
-                    ><h6>{{ perfilSeleccted.nombre }}</h6></label
+                    ><h6>{{ perfilSeleccted?.nombre }}</h6></label
                   >
                 </div>
               </div>
@@ -25,7 +25,7 @@
                 >
                 <div class="col-sm-4">
                   <label
-                    ><h6>{{ perfilSeleccted.segundoNombre }}</h6></label
+                    ><h6>{{ perfilSeleccted?.segundoNombre }}</h6></label
                   >
                 </div>
               </div>
@@ -35,7 +35,7 @@
                 >
                 <div class="col-sm-4">
                   <label
-                    ><h6>{{ perfilSeleccted.apellido }}</h6></label
+                    ><h6>{{ perfilSeleccted?.apellido }}</h6></label
                   >
                 </div>
               </div>
@@ -45,7 +45,7 @@
                 >
                 <div class="col-sm-4">
                   <label
-                    ><h6>{{ perfilSeleccted.segundoApellido }}</h6>
+                    ><h6>{{ perfilSeleccted?.segundoApellido }}</h6>
                   </label>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                 >
                 <div class="col-sm-4">
                   <label
-                    ><h6>{{ perfilSeleccted.email }}</h6></label
+                    ><h6>{{ perfilSeleccted?.email }}</h6></label
                   >
                 </div>
               </div>
@@ -65,7 +65,7 @@
                 >
                 <div class="col-sm-4">
                   <label
-                    ><h6>{{ perfilSeleccted.ubicacion }}</h6></label
+                    ><h6>{{ perfilSeleccted?.ubicacion }}</h6></label
                   >
                 </div>
               </div>
@@ -75,7 +75,7 @@
                 >
                 <div class="col-sm-4">
                   <label
-                    ><h6>{{ perfilSeleccted.descripcion }}</h6></label
+                    ><h6>{{ perfilSeleccted?.descripcion }}</h6></label
                   >
                 </div>
               </div>

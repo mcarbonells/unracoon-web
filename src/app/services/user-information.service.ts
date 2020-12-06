@@ -72,7 +72,6 @@ export class UserInformationService {
           segundoNombre:"${perfil.segundoNombre}",
           apellido:"${perfil.apellido}",
           segundoApellido:"${perfil.segundoApellido}",
-          email:"${perfil.email}",
           descripcion:"${perfil.descripcion}",
           ubicacion:"${perfil.ubicacion}"
         })
@@ -80,22 +79,6 @@ export class UserInformationService {
       `
     });
 
-   /* return this.apollo.mutate({
-      mutation: gql`
-      mutation{
-        updateProfile(id:${id},perfil:{
-          nombre:"${perfil.nombre}",
-          segundoNombre:"${perfil.segundoNombre}",
-          apellido:"${perfil.apellido}",
-          segundoApellido:"${perfil.segundoApellido}",
-          email:"${perfil.email}",
-          constrasena:"${perfil.constrasena}",
-          ubicacion:"${perfil.ubicacion}",
-          descripcion:"${perfil.descripcion}"    
-        })
-      }
-      `
-    });*/
   }
 
   updateProfilePassword(id: string,perfil: Perfil) {

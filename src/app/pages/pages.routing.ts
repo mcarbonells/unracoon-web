@@ -24,7 +24,6 @@ const routes: Routes = [
     {
         path: 'learn',
         component: PagesComponent,
-        canActivate: [AuthGuard],
         children: [
             { path: '', component: PerfilComponent, data: { titulo: 'Perfil' } },
             { path: 'foro', component: ForumComponent, data: { titulo: 'Foro' } },
@@ -33,7 +32,7 @@ const routes: Routes = [
             { path: 'vocabulary/category', component: CategoryComponent, data: { titulo: 'Vocabulario' } },
             { path: 'vocabulary/words', component: WordsComponent, data: { titulo: 'Vocabulario' } },
             { path: 'exam', component: ExamsComponent, data: { titulo: 'Examenes' } },
-          { path: 'exam/examLevel', component: ExamsLevelComponent, data: { titulo: 'Examenes' } },
+            { path: 'exam/examLevel', component: ExamsLevelComponent, data: { titulo: 'Examenes' } },
             { path: 'weekQuiz', component: WeekQuizComponent, data: {titulo: 'WeekQuiz'}},
             { path: 'userQuizzes', component: UserQuizComponent, data: {titulo: 'UserQuiz'}},
             { path: 'weekQuiz/quiz', component: UserQuizFormComponent, data: {titulo: 'UserQuiz'}},
