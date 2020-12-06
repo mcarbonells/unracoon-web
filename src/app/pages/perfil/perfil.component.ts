@@ -22,6 +22,7 @@ export class PerfilComponent implements OnInit {
   formProfileVisible = false;
 
   constructor(
+
     private perfilService: UserInformationService,
     private fb: FormBuilder,
     private usuarioService: UsuarioService
@@ -31,7 +32,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.perfilSuscripcion = this.perfilService
-      .profileById(this.user.id.toString())
+      .profileById('1')
       .subscribe((response: ProfileResponse) => {
         console.log(response);
         this.perfilSeleccted = response.data.profileById;
@@ -39,22 +40,22 @@ export class PerfilComponent implements OnInit {
       });
   }
 
-  datosIniciales(perfil: Perfil) {
+  datosIniciales(perfil?: Perfil) {
     this.perfilForm = this.fb.group({
       //id:[perfil.id,Validators.required],
-      nombre: [perfil.nombre, Validators.required],
-      segundoNombre: [perfil.segundoNombre, Validators.required],
-      apellido: [perfil.apellido, Validators.required],
-      segundoApellido: [perfil.segundoApellido, Validators.required],
-      email: [perfil.email, Validators.required],
-      ubicacion: [perfil.ubicacion, Validators.required],
-      descripcion: [perfil.descripcion, Validators.required],
+      nombre: [perfil?.nombre || '', Validators.required],
+      segundoNombre: [perfil?.segundoNombre || '', Validators.required],
+      apellido: [perfil?.apellido || '', Validators.required],
+      segundoApellido: [perfil?.segundoApellido || '', Validators.required],
+      email: [perfil?.email || '', Validators.required],
+      ubicacion: [perfil?.ubicacion || '', Validators.required],
+      descripcion: [perfil?.descripcion || '', Validators.required],
     });
   }
 
   enviarPerfil() {
     this.perfilService
-      .updateProfile(this.user.id.toString(), this.perfilForm.value)
+      .updateProfile('1', this.perfilForm.value)
       .subscribe((response: ProfileResponse) => {
         console.log(response);
         this.toogleForm();
