@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlApi: 'http://ec2-100-26-179-244.compute-1.amazonaws.com:5000/graphiql',
+  urlApi: 'http://localhost:5000/graphiql',
   firebase: {
     apiKey: 'AIzaSyDosGLagxaFgF54t8NBGCVwiGzJpZanCQw',
     authDomain: 'unraccon.firebaseapp.com',
